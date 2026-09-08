@@ -34,11 +34,10 @@ export default function Pillars({ m }: { m: ThesisModel }) {
         <article className="flex flex-col justify-center bg-[var(--bg-raised)] p-4 sm:p-5">
           <h3 className="text-[14px] font-semibold tracking-tight">How the grade is built</h3>
           <p className="mt-2 text-[12px] leading-relaxed text-[var(--text-faint)]">
-            No composite score, no weights chosen after the fact. Every pillar reduces to a
-            comparison against its own Day 0 value using a rule fixed at launch. Business growth
-            stays out of the count while Venice has published nothing new, so the headline is
-            currently decided by {m.overall.scored} pillars rather than five. That is a limitation,
-            and it is shown rather than hidden.
+            No composite score and no weights picked after the fact. Each pillar compares against
+            its own Day 0 value using a rule fixed at launch. Business growth sits out of the count
+            until Venice publishes something new, so the headline currently rests on{" "}
+            {m.overall.scored} pillars rather than five.
           </p>
         </article>
       </div>

@@ -83,9 +83,7 @@ export default function Scoreboard({ m }: { m: ThesisModel }) {
                   </td>
                   <td className="tnum px-4 py-3 text-right">${compactNumber(b.valuation, 2)}</td>
                   <td className="tnum px-4 py-3 text-right font-medium">
-                    {b.impliedVvvPrice >= 1000
-                      ? "$" + compactNumber(b.impliedVvvPrice, 0)
-                      : usd(b.impliedVvvPrice, { dp: 0 })}
+                    {usd(b.impliedVvvPrice, { dp: b.impliedVvvPrice < 10 ? 2 : 0 })}
                   </td>
                   <td className="tnum px-4 py-3 text-right font-medium">
                     {b.multipleFromCurrent.toFixed(1)}x

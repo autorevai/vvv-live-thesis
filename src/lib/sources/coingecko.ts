@@ -1,5 +1,7 @@
 import { COINGECKO_IDS, HISTORY_START_ISO } from "@/lib/constants";
 import { cached } from "@/lib/cache";
+import { PAPRIKA_IDS, getPaprikaQuote } from "./paprika";
+import type { VeniceStats } from "./venice";
 import { fetchJson, sleep } from "./fetchers";
 
 const BASE = "https://api.coingecko.com/api/v3";
@@ -14,6 +16,7 @@ export type MarketQuote = {
   marketCap: number;
   change24h: number;
   updatedAt: number;
+  source: "coingecko" | "coinpaprika" | "venice";
 };
 
 export type MarketQuotes = {
@@ -30,13 +33,52 @@ type SimplePriceRow = {
   last_updated_at: number;
 };
 
-export async function getQuotes(revalidate = 60): Promise<MarketQuotes> {
-  const { value } = await cached("cg:quotes", revalidate * 1000, () => loadQuotes(revalidate));
-  return value;
+/**
+ * VVV comes from Venice's own feed, which is authoritative and has no rate
+ * limit. Comparators come from CoinGecko, falling back to CoinPaprika per asset
+ * so one provider's rate limit cannot blank the page.
+ */
+export async function getQuotes(venice: VeniceStats, revalidate = 60): Promise<MarketQuotes> {
+  const comparators = await cached("markets:comparators", revalidate * 1000, () =>
+    loadComparators(revalidate),
+  );
+  return {
+    vvv: {
+      price: venice.price,
+      marketCap: venice.marketCap,
+      change24h: venice.priceChange24h,
+      updatedAt: venice.fetchedAt,
+      source: "venice",
+    },
+    ...comparators.value,
+  };
 }
 
-async function loadQuotes(revalidate: number): Promise<MarketQuotes> {
-  const ids = Object.values(COINGECKO_IDS).join(",");
+async function loadComparators(revalidate: number) {
+  const cg = await (async () => {
+    try {
+      return await loadQuotes(revalidate);
+    } catch (err) {
+      console.warn("coingecko comparators failed, falling back to coinpaprika", err);
+      return null;
+    }
+  })();
+
+  const keys = ["tao", "near", "zec"] as const;
+  const out = {} as Record<(typeof keys)[number], MarketQuote>;
+
+  for (const k of keys) {
+    if (cg?.[k]) {
+      out[k] = cg[k];
+      continue;
+    }
+    out[k] = await getPaprikaQuote(PAPRIKA_IDS[k], revalidate);
+  }
+  return out;
+}
+
+async function loadQuotes(revalidate: number) {
+  const ids = [COINGECKO_IDS.tao, COINGECKO_IDS.near, COINGECKO_IDS.zec].join(",");
   const data = await fetchJson<Record<string, SimplePriceRow>>(
     "coingecko/simple",
     withKey(
@@ -52,10 +94,10 @@ async function loadQuotes(revalidate: number): Promise<MarketQuotes> {
       marketCap: r.usd_market_cap,
       change24h: r.usd_24h_change,
       updatedAt: r.last_updated_at * 1000,
+      source: "coingecko",
     };
   };
   return {
-    vvv: row(COINGECKO_IDS.vvv),
     tao: row(COINGECKO_IDS.tao),
     near: row(COINGECKO_IDS.near),
     zec: row(COINGECKO_IDS.zec),
@@ -96,8 +138,18 @@ function dayKey(ms: number) {
   return Math.floor(ms / 86_400_000) * 86_400_000;
 }
 
-export async function getAllRanges(revalidate = 900) {
-  const { value } = await cached("cg:ranges", revalidate * 1000, () => loadAllRanges(revalidate));
+/**
+ * Daily closes barely move within a day, so this is cached for hours and may be
+ * served up to a week stale. That keeps the whole site to a handful of range
+ * calls per day, which the keyless CoinGecko tier can sustain.
+ */
+export async function getAllRanges(revalidate = 6 * 3600) {
+  const { value } = await cached(
+    "cg:ranges",
+    revalidate * 1000,
+    () => loadAllRanges(revalidate),
+    7 * 24 * 3600 * 1000,
+  );
   return value;
 }
 

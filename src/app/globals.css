@@ -113,6 +113,16 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
 
+@keyframes flash-in {
+  from { color: var(--accent); }
+  to { color: var(--text); }
+}
+.flash { animation: flash-in 0.9s ease-out both; }
+
+.icon-sun { display: none; }
+:root[data-theme="light"] .icon-moon { display: none; }
+:root[data-theme="light"] .icon-sun { display: inline; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

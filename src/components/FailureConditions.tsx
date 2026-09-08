@@ -50,7 +50,7 @@ export default function FailureConditions({ m }: { m: ThesisModel }) {
       <SectionHead
         eyebrow="Falsifiability"
         title="How this thesis fails"
-        sub="A thesis that cannot fail is marketing. These are the conditions that would break it, published at launch and checked against live data where a live source exists."
+        sub="A thesis that cannot fail is marketing. These are the conditions that would break this one, published at launch and checked against live data where one exists."
       />
       <ul className="grid grid-cols-1 gap-px bg-[var(--border)] md:grid-cols-2">
         {conditions.map((c) => {
@@ -76,8 +76,8 @@ export default function FailureConditions({ m }: { m: ThesisModel }) {
         })}
       </ul>
       <p className="border-t p-4 text-[11px] leading-relaxed text-[var(--text-faint)] sm:p-5">
-        Conditions marked Watch have no live feed and are judged by hand when new information is
-        published. They are never inferred from price.
+        Conditions marked Watch have no live feed. They are judged by hand when Venice publishes
+        something new, never inferred from price.
       </p>
     </Card>
   );

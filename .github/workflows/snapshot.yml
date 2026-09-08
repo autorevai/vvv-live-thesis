@@ -1,0 +1,44 @@
+name: Daily snapshot
+
+on:
+  schedule:
+    # 00:20 UTC, giving CoinGecko's daily close time to settle.
+    - cron: "20 0 * * *"
+    # A second run in case the first hit a transient upstream failure. The
+    # script is a no-op once the day is already on record.
+    - cron: "20 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Record snapshot
+        env:
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+        run: node scripts/snapshot.mjs
+
+      - name: Commit
+        run: |
+          if [ -z "$(git status --porcelain data/snapshots)" ]; then
+            echo "Nothing new to record."
+            exit 0
+          fi
+          git config user.name "vvv-thesis-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/snapshots
+          git commit -m "data: snapshot $(date -u +%Y-%m-%d)"
+          git push

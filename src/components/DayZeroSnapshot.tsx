@@ -61,7 +61,7 @@ export default function DayZeroSnapshot({
               Day 0 snapshot · {DAY_ZERO_LABEL}
             </h2>
             <p className="mt-1.5 text-[12px] leading-relaxed text-[var(--text-faint)]">
-              Frozen at launch so the thesis cannot be rewritten after the fact.
+              What the numbers looked like the day the call was made.
             </p>
           </div>
           <button
@@ -116,8 +116,8 @@ export default function DayZeroSnapshot({
             published staked and locked figures above.
           </p>
           <p className="mt-3">
-            The baseline lives in a single source file whose edit history is public, so a silent
-            revision would show up in the commit log.
+            The baseline lives in one source file with a public commit history, so any revision
+            shows up in the log.
           </p>
         </div>
       </div>

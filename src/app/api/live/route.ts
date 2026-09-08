@@ -8,11 +8,8 @@ export const revalidate = 60;
 
 export async function GET() {
   try {
-    const [quotes, chain, venice] = await Promise.all([
-      getQuotes(60),
-      getChainState(300),
-      getVeniceStats(60),
-    ]);
+    const [chain, venice] = await Promise.all([getChainState(300), getVeniceStats(60)]);
+    const quotes = await getQuotes(venice, 60);
     const model = buildThesis(quotes, chain, venice);
     return NextResponse.json(model, {
       headers: {

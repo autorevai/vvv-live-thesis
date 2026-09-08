@@ -6,24 +6,22 @@ import { getVeniceStats } from "@/lib/sources/venice";
 import { soft } from "@/lib/sources/fetchers";
 import { buildThesis } from "@/lib/thesis";
 import { DAY_ZERO } from "@/lib/constants";
+import { dailyDeltas } from "@/lib/snapshots";
 
 export const revalidate = 60;
 
 export default async function Page() {
-  const [quotes, chain, venice] = await Promise.all([
-    soft(getQuotes(60)),
-    soft(getChainState(300)),
-    soft(getVeniceStats(60)),
-  ]);
+  const [chain, venice] = await Promise.all([soft(getChainState(300)), soft(getVeniceStats(60))]);
+  const quotes = venice ? await soft(getQuotes(venice, 60)) : null;
 
   const live = quotes && chain && venice ? buildThesis(quotes, chain, venice) : null;
   const history = live ? await soft(buildHistory(live.freeFloat)) : null;
 
-  return <Dashboard initialLive={live} initialHistory={history} />;
+  return <Dashboard initialLive={live} initialHistory={history} daily={dailyDeltas()} />;
 }
 
 async function buildHistory(freeFloat: number): Promise<HistoryPayload> {
-  const ranges = await getAllRanges(900);
+  const ranges = await getAllRanges();
   const tao = new Map(ranges.tao.map((p) => [p.t, p]));
   const near = new Map(ranges.near.map((p) => [p.t, p]));
   const zec = new Map(ranges.zec.map((p) => [p.t, p]));

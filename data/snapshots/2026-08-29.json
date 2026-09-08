@@ -1,0 +1,23 @@
+{
+  "date": "2026-08-29",
+  "recorded_at": "2026-09-08T00:00:00.000Z",
+  "note": "Backfilled at launch from Base block 50586127 (first block at or after 2026-08-29T00:00:00Z) and CoinGecko daily closes. Chain values were read directly, not estimated.",
+  "source_block": 50586127,
+  "vvv_price": 16.565361,
+  "vvv_circulating": null,
+  "vvv_total_supply": null,
+  "vvv_free_float": 13600000,
+  "vvv_free_float_cap": 225760000,
+  "vvv_staked_plus_locked": 34322288.09,
+  "vvv_burned": 33844575.616,
+  "vvv_total_supply_onchain": 114731841.436,
+  "diem_supply": null,
+  "vvv_market_cap": null,
+  "tao_market_cap": 2267690073.416721,
+  "near_market_cap": 2438710684.3097186,
+  "zec_market_cap": 14214916470.863245,
+  "venice_arr": 100000000,
+  "venice_users": null,
+  "api_calls_day": null,
+  "tokens_processed_month": null
+}

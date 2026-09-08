@@ -12,7 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import type { HistoryPayload } from "@/app/api/history/route";
-import { CRYPTO_COMPARATORS, DAY_ZERO_LABEL, PRICE_MILESTONES, PRIVATE_BENCHMARKS } from "@/lib/constants";
+import { DAY_ZERO_LABEL, PRICE_MILESTONES, PRIVATE_BENCHMARKS } from "@/lib/constants";
 import { compactNumber, longDate, usd } from "@/lib/format";
 
 type Mode = "valuation" | "indexed";
@@ -46,10 +46,10 @@ export default function ThesisChart({
   const [hidden, setHidden] = useState<Set<SeriesKey>>(new Set());
   const [showBenchmarks, setShowBenchmarks] = useState(true);
 
-  const points = history?.points ?? [];
   const dayZeroMs = history?.dayZeroMs ?? 0;
 
   const filtered = useMemo(() => {
+    const points = history?.points ?? [];
     if (!points.length) return [];
     const now = points[points.length - 1].t;
     const cut =
@@ -61,7 +61,7 @@ export default function ThesisChart({
             ? dayZeroMs
             : 0;
     return points.filter((p) => p.t >= cut);
-  }, [points, range, dayZeroMs]);
+  }, [history, range, dayZeroMs]);
 
   const rows = useMemo(
     () =>
@@ -106,8 +106,43 @@ export default function ThesisChart({
     const lo = Math.min(...vals);
     const hi = Math.max(...vals);
     if (mode === "indexed") return [Math.min(0.9, lo * 0.97), Math.max(1.1, hi * 1.05)];
-    return [lo * 0.7, hi * 1.35];
+    return [lo * 0.62, hi * 1.5];
   }, [rows, hidden, benchmarks, mode]);
+
+  // Recharts packs a log axis with ticks. Pick clean decade and half-decade
+  // steps inside the domain instead, so the labels stay readable.
+  const ticks = useMemo(() => {
+    const [lo, hi] = domain;
+    if (mode === "indexed") return undefined;
+    const out: number[] = [];
+    for (let e = Math.floor(Math.log10(lo)); e <= Math.ceil(Math.log10(hi)); e++) {
+      for (const m of [1, 2, 5]) {
+        const v = m * 10 ** e;
+        if (v >= lo && v <= hi) out.push(v);
+      }
+    }
+    return out.length > 2 ? out : undefined;
+  }, [domain, mode]);
+
+  /**
+   * Some benchmarks land almost on top of each other ($500 VVV is ~$6.95B and
+   * OpenRouter is $7B). Draw every line, but drop a label that would collide
+   * with the one above it. The scoreboard below carries the full list.
+   */
+  const labelled = useMemo(() => {
+    if (!benchmarks.length) return benchmarks.map((b) => ({ ...b, showLabel: true }));
+    const [lo, hi] = domain;
+    const span = Math.log10(hi) - Math.log10(lo);
+    const minGap = 0.045; // ~4.5% of the plot height
+    const sorted = [...benchmarks].sort((a, b) => b.y - a.y);
+    let lastPos = Infinity;
+    return sorted.map((b) => {
+      const pos = (Math.log10(hi) - Math.log10(b.y)) / span;
+      const showLabel = pos - lastPos > minGap || lastPos === Infinity;
+      if (showLabel) lastPos = pos;
+      return { ...b, showLabel };
+    });
+  }, [benchmarks, domain]);
 
   const toggle = (k: SeriesKey) =>
     setHidden((prev) => {
@@ -189,7 +224,7 @@ export default function ThesisChart({
           </div>
         ) : (
           <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={rows} margin={{ top: 8, right: 96, left: 8, bottom: 8 }}>
+            <ComposedChart data={rows} margin={{ top: 12, right: 10, left: 10, bottom: 8 }}>
               <defs>
                 <linearGradient id="vvvFill" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="var(--vvv)" stopOpacity={0.22} />
@@ -220,7 +255,8 @@ export default function ThesisChart({
                 domain={domain}
                 allowDataOverflow
                 orientation="right"
-                width={62}
+                width={58}
+                ticks={ticks}
                 tickFormatter={(v) =>
                   mode === "valuation" ? "$" + compactNumber(v, 0) : v.toFixed(2) + "x"
                 }
@@ -243,19 +279,25 @@ export default function ThesisChart({
                 />
               )}
 
-              {benchmarks.map((b) => (
+              {labelled.map((b) => (
                 <ReferenceLine
                   key={b.label}
                   y={b.y}
                   stroke={b.kind === "milestone" ? "var(--border-strong)" : "var(--warn)"}
-                  strokeDasharray={b.kind === "milestone" ? "3 5" : "1 4"}
-                  strokeOpacity={b.kind === "milestone" ? 0.9 : 0.65}
-                  label={{
-                    value: b.label,
-                    position: "right",
-                    fill: b.kind === "milestone" ? "var(--text-faint)" : "var(--warn)",
-                    fontSize: 10,
-                  }}
+                  strokeDasharray={b.kind === "milestone" ? "3 5" : "2 4"}
+                  strokeOpacity={b.kind === "milestone" ? 0.75 : 0.55}
+                  label={
+                    b.showLabel
+                      ? {
+                          value: b.label,
+                          position: "insideTopLeft",
+                          offset: 6,
+                          dy: -3,
+                          fill: b.kind === "milestone" ? "var(--text-faint)" : "var(--warn)",
+                          fontSize: 10,
+                        }
+                      : undefined
+                  }
                 />
               ))}
 

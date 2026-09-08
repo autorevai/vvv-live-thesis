@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { DAY_ZERO_LABEL } from "@/lib/constants";
 import { relativeTime, usd } from "@/lib/format";
 import type { ThesisModel } from "@/lib/thesis";
@@ -17,15 +16,6 @@ export default function TopBar({
   pulse: number;
   onOpenSnapshot: () => void;
 }) {
-  const [flash, setFlash] = useState(false);
-
-  useEffect(() => {
-    if (!pulse) return;
-    setFlash(true);
-    const t = setTimeout(() => setFlash(false), 900);
-    return () => clearTimeout(t);
-  }, [pulse]);
-
   return (
     <div className="sticky top-0 z-40 border-b bg-[color-mix(in_srgb,var(--bg)_82%,transparent)] backdrop-blur-xl">
       <div className="mx-auto flex max-w-[1180px] items-center gap-3 px-4 py-2.5 sm:px-6">
@@ -35,10 +25,9 @@ export default function TopBar({
         </span>
 
         <div className="ml-auto flex items-center gap-3">
-          <span
-            className="tnum text-[13px] font-semibold transition-colors duration-500"
-            style={{ color: flash ? "var(--accent)" : "var(--text)" }}
-          >
+          {/* Remounting on each refresh restarts the highlight animation, so no
+              timer or state is needed to flash the new price. */}
+          <span key={pulse} className="tnum flash text-[13px] font-semibold">
             {usd(m.price)}
           </span>
           <span
@@ -69,26 +58,16 @@ export default function TopBar({
   );
 }
 
+/**
+ * Stateless on purpose. The theme lives on <html data-theme>, applied by the
+ * inline script before paint, so there is nothing to hydrate and no mismatch.
+ * CSS picks which icon to show.
+ */
 function ThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-  useEffect(() => {
-    const saved = (() => {
-      try {
-        return localStorage.getItem("vvv-theme");
-      } catch {
-        return null;
-      }
-    })();
-    const next = saved === "light" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-  }, []);
-
   const flip = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
+    const root = document.documentElement;
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    root.dataset.theme = next;
     try {
       localStorage.setItem("vvv-theme", next);
     } catch {
@@ -99,18 +78,15 @@ function ThemeToggle() {
   return (
     <button
       onClick={flip}
-      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-label="Toggle dark and light mode"
       className="rounded-md border p-1.5 text-[var(--text-dim)] transition-colors hover:bg-[var(--bg-hover)] hover:text-[var(--text)]"
     >
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        {theme === "dark" ? (
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        ) : (
-          <>
-            <circle cx="12" cy="12" r="4.5" />
-            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-          </>
-        )}
+        <path className="icon-moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        <g className="icon-sun">
+          <circle cx="12" cy="12" r="4.5" />
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+        </g>
       </svg>
     </button>
   );

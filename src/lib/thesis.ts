@@ -294,15 +294,13 @@ function gradePillars(i: PillarInputs): Pillar[] {
       name: "Business growth",
       grade: "neutral",
       pending: true,
-      headline: "Awaiting the next disclosure",
+      headline: "ARR ran $70M+ to $100M+ in under two months",
       detail:
-        "Venice publishes ARR, users, API calls and tokens processed as point-in-time updates, not as a live feed. This pillar stays neutral until a new figure is published and verified. It is never interpolated.",
-      inputs: [
-        { label: "Venice ARR", value: "$100M+ (verified Aug 29, 2026)" },
-        { label: "Registered users", value: "Not disclosed" },
-        { label: "API calls / day", value: "Not disclosed" },
-        { label: "Tokens / month", value: "Not disclosed" },
-      ],
+        "Venice publishes these as point-in-time updates rather than a live feed, so the pillar holds neutral until a figure newer than Day 0 lands. The trajectory into Day 0 was steep: profitable at $70M+ annualized at the July Series A, $100M+ by launch. Nothing here is interpolated between disclosures.",
+      inputs: BUSINESS_METRICS.filter((b) => b.key !== "series-a").map((b) => ({
+        label: b.label,
+        value: `${b.display} · ${b.effectiveDate.slice(0, 7)}`,
+      })),
     },
     {
       key: "buy-pressure",

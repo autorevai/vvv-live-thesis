@@ -27,11 +27,8 @@ export async function GET() {
   };
 
   try {
-    const [quotes, chain, venice] = await Promise.all([
-      getQuotes(300),
-      getChainState(300),
-      getVeniceStats(300),
-    ]);
+    const [chain, venice] = await Promise.all([getChainState(300), getVeniceStats(300)]);
+    const quotes = await getQuotes(venice, 300);
     const m = buildThesis(quotes, chain, venice);
     stats = {
       price: "$" + m.price.toFixed(2),

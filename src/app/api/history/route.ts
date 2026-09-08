@@ -29,7 +29,7 @@ export type HistoryPayload = {
 export async function GET() {
   try {
     const [ranges, chain, venice] = await Promise.all([
-      getAllRanges(900),
+      getAllRanges(),
       getChainState(300),
       getVeniceStats(60),
     ]);
