@@ -47,6 +47,14 @@ export const PRESS: PressItem[] = [
     kind: "category",
   },
   {
+    date: "2026-08-18",
+    publisher: "OpenAI Help Center",
+    title: "How your data is used to improve model performance",
+    url: "https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance",
+    note: "OpenAI's own policy. Personal ChatGPT and Codex accounts are trained on unless you opt out, and the usual opt-out does not cover Codex full environments.",
+    kind: "category",
+  },
+  {
     date: "2026-07-01",
     publisher: "TechCrunch",
     title: "Venice AI becomes a unicorn with $65M Series A as its privacy-first platform takes off",
@@ -109,3 +117,10 @@ export const PRIVACY_MODES = [
 ];
 
 export const OPENAI_QUOTE = `While unlikely, we cannot rule out that de-identified data derived from their usage of our products helped improve our models.`;
+
+/** Straight from OpenAI's help centre, updated August 2026. */
+export const OPENAI_POLICY = {
+  training: `When you use our services for individuals such as ChatGPT and Codex, we may use your content to train our models.`,
+  optOutGap: `Codex has separate controls for allowing training on full environments... Note that adjusting your settings in the ChatGPT interface or privacy portal will not affect these full-environment Codex settings.`,
+  url: "https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance",
+};

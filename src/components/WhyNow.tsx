@@ -1,6 +1,6 @@
 "use client";
 
-import { OPENAI_QUOTE, PRESS, PRIVACY_MODES } from "@/lib/press";
+import { OPENAI_POLICY, OPENAI_QUOTE, PRESS, PRIVACY_MODES } from "@/lib/press";
 import { longDate } from "@/lib/format";
 import { Card, SectionHead } from "./ui";
 
@@ -22,41 +22,72 @@ export default function WhyNow() {
       <Card>
         <SectionHead
           eyebrow="Why now"
-          title="Why private AI matters right now"
-          sub="This bet needs demand for private AI to keep growing. This week showed why companies might start paying for it."
+          title="Your prompts are training data by default"
+          sub="This bet needs companies to start paying for AI that does not keep their work. This week showed exactly why they might."
         />
 
         <div className="space-y-4 p-4 text-[14px] leading-relaxed text-[var(--text-dim)] sm:p-5">
           <p>
-            On September 8, 2026, NYU mathematician Tristan Buckmaster published three proofs on the
-            Navier-Stokes problem along with a statement alleging that a parallel OpenAI effort built
-            on his work after word of it reached the company. He had used OpenAI&apos;s Codex heavily
-            while assembling the project. OpenAI published a full proof the same day and disputes the
-            account.
+            OpenAI trains on what you type. On personal ChatGPT and Codex accounts it is on unless
+            you go and turn it off, and turning it off in the obvious place does not cover
+            everything. Both of these are from OpenAI&apos;s own help pages.
           </p>
 
-          <figure className="rounded-lg border-l-2 border-l-[var(--warn)] bg-[var(--bg)] p-3.5">
-            <blockquote className="text-[13px] leading-relaxed text-[var(--text)]">
-              &ldquo;{OPENAI_QUOTE}&rdquo;
+          <figure className="space-y-2.5">
+            <blockquote className="rounded-lg border-l-2 border-l-[var(--warn)] bg-[var(--bg)] p-3.5 text-[13px] leading-relaxed text-[var(--text)]">
+              &ldquo;{OPENAI_POLICY.training}&rdquo;
             </blockquote>
-            <figcaption className="mt-2 text-[11px] text-[var(--text-faint)]">
-              OpenAI, in its own post on the result. It also says no specific user data was accessed
-              and that the proofs differ.
+            <blockquote className="rounded-lg border-l-2 border-l-[var(--warn)] bg-[var(--bg)] p-3.5 text-[13px] leading-relaxed text-[var(--text)]">
+              &ldquo;{OPENAI_POLICY.optOutGap}&rdquo;
+            </blockquote>
+            <figcaption className="text-[11px] text-[var(--text-faint)]">
+              OpenAI Help Center, updated August 2026.{" "}
+              <a
+                href={OPENAI_POLICY.url}
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-dotted underline-offset-2 hover:text-[var(--text-dim)]"
+              >
+                Read it
+              </a>
+              . Business and API accounts are not trained on by default. Personal accounts are.
             </figcaption>
           </figure>
 
           <p>
-            Take the denial at face value and the sentence still stands on its own. A lab cannot
-            fully account for what its models absorbed from customer usage. For a mathematician that
-            is a credit dispute. For a company putting unreleased research, source code or deal
-            documents into a model, it is a procurement question.
+            On September 8, 2026, a mathematician found out what that means in practice. NYU
+            professor Tristan Buckmaster published three proofs on the Navier-Stokes problem, one of
+            the biggest open problems in maths, along with a statement saying an OpenAI team started
+            working on the same narrow approach after word of his progress reached the company. He
+            had been using Codex heavily throughout.
           </p>
 
-          <p className="text-[var(--text-faint)]">
-            That is what Venice sells. It does not store your prompts by default, and paid tiers
-            run them inside sealed hardware. Whether companies actually start paying for that is
-            what the burn and staking numbers below measure. A news story is not proof this bet is
-            working, and nothing here treats it that way.
+          <p>
+            OpenAI published its own full proof the same day. It says it never saw his work and that
+            the proofs differ. It also wrote this:
+          </p>
+
+          <figure>
+            <blockquote className="rounded-lg border-l-2 border-l-[var(--neg)] bg-[var(--bg)] p-3.5 text-[13px] leading-relaxed text-[var(--text)]">
+              &ldquo;{OPENAI_QUOTE}&rdquo;
+            </blockquote>
+            <figcaption className="mt-2 text-[11px] text-[var(--text-faint)]">
+              OpenAI, in its own post on the result.
+            </figcaption>
+          </figure>
+
+          <p>
+            A company that spent $22.5M of compute in a week cannot say for certain that its models
+            did not learn from a user&apos;s private work. For a mathematician that is a fight over
+            credit. For anyone putting source code, unreleased research or deal documents into a
+            model, it is a straight business risk.
+          </p>
+
+          <p className="text-[var(--text-dim)]">
+            That is what Venice sells. It does not keep your prompts by default, and on paid tiers
+            they run inside sealed hardware that Venice itself cannot read. The whole bet is that
+            more people start caring about that. The burn and staking numbers below are where you
+            find out whether they do.
           </p>
         </div>
 
