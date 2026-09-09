@@ -13,9 +13,7 @@ export default function Targets({ m }: { m: ThesisModel }) {
           Price targets
         </h2>
         <p className="text-[11px] text-[var(--text-faint)]">
-          Called {DAY_ZERO.date === "2026-08-29" ? "Aug 29, 2026" : DAY_ZERO.date} at{" "}
-          {usd(DAY_ZERO.vvvPrice)}. Now {usd(m.price)}, a free-float cap of $
-          {compactNumber(m.freeFloatCap, 0)}.
+          Called Aug 29 at {usd(DAY_ZERO.vvvPrice)}. Now {usd(m.price)}.
         </p>
       </div>
 

@@ -448,22 +448,19 @@ export default function ThesisChart({
       <p className="border-t px-4 py-3 text-[11px] leading-relaxed text-[var(--text-faint)] sm:px-5">
         {mode === "gap" ? (
           <>
-            Each line is how many times bigger that comparator is than VVV on the day. It falls
-            when VVV gains ground and rises when it loses ground, whichever way the whole market
-            moved. 1.0x means they are worth the same.
+            How many times bigger each comparator is than VVV that day. Down means VVV gained
+            ground. 1.0x is parity.
           </>
         ) : mode === "indexed" ? (
           <>
-            This shows which one moved more, not how close VVV is to catching them. Switch to Gap
-            to parity for that.
+            This shows which moved more. For the distance to catching them, use Gap to parity.
           </>
         ) : (
           <>
-            The historical free-float cap line applies today&apos;s free float of{" "}
+            The VVV line applies today&apos;s free float of{" "}
             <span className="tnum text-[var(--text-dim)]">{compactNumber(freeFloat, 2)} VVV</span> to
-            each day&apos;s VVV close. Free float was {compactNumber(13_600_000, 2)} at Day 0, so the
-            scaling shifts the line by under 3 percent. Daily float snapshots start accumulating from
-            launch and will replace this once the series is long enough to stand on its own.
+            each day&apos;s close. It was {compactNumber(13_600_000, 2)} at Day 0, so this shifts
+            the line by under 3 percent.
           </>
         )}
       </p>

@@ -50,7 +50,7 @@ export default function FailureConditions({ m }: { m: ThesisModel }) {
       <SectionHead
         eyebrow="Risks"
         title="What would prove this wrong"
-        sub="Written at launch, before the data moved. Where there is a live source, the status updates on its own."
+        sub="Written at launch. Live where there is a source for it."
       />
       <ul className="grid grid-cols-1 gap-px bg-[var(--border)] md:grid-cols-2">
         {conditions.map((c) => {

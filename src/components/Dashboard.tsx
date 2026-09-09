@@ -91,8 +91,7 @@ export default function Dashboard({
         <div>
           <div className="text-[15px] font-medium">Live data is unavailable right now</div>
           <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-[var(--text-faint)]">
-            An upstream source is not responding. Nothing is estimated in its place, so the page
-            waits instead.
+            A data source is down. The page waits rather than guess.
           </p>
           <button
             onClick={() => void refreshLive()}
@@ -134,9 +133,8 @@ function Footer({ m }: { m: ThesisModel }) {
     <footer className="border-t">
       <div className="mx-auto max-w-[1180px] px-4 py-8 sm:px-6 sm:py-10">
         <p className="max-w-3xl text-[12px] leading-relaxed text-[var(--text-faint)]">
-          A personal investment thesis, tracked in public. Not investment advice, not a
-          solicitation, not affiliated with Venice AI. Every figure carries its source and the time
-          it was read. Where no live source exists, the page says so.
+          A personal investment thesis, tracked in public. Not investment advice. Not affiliated
+          with Venice AI. Every figure carries its source and the time it was read.
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-[var(--text-dim)]">
           <a className="hover:text-[var(--text)]" href="https://venice.ai/token" target="_blank" rel="noreferrer">

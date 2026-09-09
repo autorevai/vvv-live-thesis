@@ -12,7 +12,7 @@ export default function DailyRecord({ rows }: { rows: DailyDelta[] }) {
       <SectionHead
         eyebrow="Daily record"
         title="One row per day since Day 0"
-        sub="Saved once a day to a public repository. Old rows are never edited, so anyone can check the history. Missing numbers stay blank."
+        sub="Saved daily to a public repo. Old rows stay as written."
         right={
           <span className="tnum shrink-0 rounded-md border px-2 py-1 text-[11px] text-[var(--text-dim)]">
             {rows.length} {rows.length === 1 ? "day" : "days"} on record

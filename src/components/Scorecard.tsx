@@ -9,7 +9,7 @@ export default function Scorecard({ m }: { m: ThesisModel }) {
       <SectionHead
         eyebrow="Thesis scorecard"
         title="Day 0 versus now, metric by metric"
-        sub="Each row shows the rule that decides whether it counts as good or bad, written before the data moved. Rows with no live source say so instead of passing off an old number as current."
+        sub="Every rule was written at launch, before the data moved."
       />
       <TableScroll>
         <table className="w-full text-[13px]">

@@ -23,21 +23,19 @@ export default function WhyNow() {
         <SectionHead
           eyebrow="Why now"
           title="This is the whole bet, and it just hit the front page"
-          sub="September 8, 2026. A mathematician put a year of unpublished work into OpenAI's Codex, asked whether they trained on it, and could not get an answer."
+          sub="Sep 8, 2026. A mathematician ran a year of unpublished work through OpenAI's Codex, asked if they trained on it, and got no answer."
         />
 
         <div className="space-y-4 p-4 text-[14px] leading-relaxed text-[var(--text-dim)] sm:p-5">
           <p>
-            NYU professor Tristan Buckmaster and Levent Alp&ouml;ge published three proofs on the
-            Navier-Stokes problem, one of the biggest open problems in maths. Buckmaster then
-            published a statement about what happened while they were finishing it. An OpenAI team
-            started on the same narrow approach days after word of his progress reached the company,
-            and released a full proof of the central problem before he could publish.
+            NYU professor Tristan Buckmaster and Levent Alp&ouml;ge published three proofs on
+            Navier-Stokes, one of the biggest open problems in maths. Word of their progress reached
+            OpenAI. Days later an OpenAI team took the same narrow approach and published a full
+            proof first.
           </p>
 
           <p>
-            He had been running the entire project through Codex. Here is what happened when he
-            asked about it:
+            He ran the whole project through Codex. He asked about it:
           </p>
 
           <figure>
@@ -58,9 +56,8 @@ export default function WhyNow() {
           </figure>
 
           <p>
-            He was paying OpenAI out of his own research funds, with no institutional agreement.
-            That matters, because OpenAI treats personal accounts differently from business ones,
-            and it publishes the rule itself:
+            He paid out of his own research funds. Personal account, and OpenAI publishes what
+            that means:
           </p>
 
           <figure className="space-y-2.5">
@@ -80,8 +77,8 @@ export default function WhyNow() {
               >
                 Read it
               </a>
-              . Training is on by default on personal ChatGPT and Codex accounts, and switching it
-              off in the obvious place does not cover Codex full environments.
+              . Training is on by default for personal accounts. The obvious opt-out misses Codex
+              full environments.
             </figcaption>
           </figure>
 
@@ -97,23 +94,21 @@ export default function WhyNow() {
           </figure>
 
           <p className="text-[var(--text)]">
-            Put it together. Training is on by default. The opt-out has holes. A researcher put a
-            year of unpublished work through the product, asked twice whether it was trained on, and
-            got no answer. The company itself will not rule it out. You do not need anyone to be
-            proven guilty for this to change how people buy AI.
+            Training is on by default. The opt-out has holes. A researcher ran a year of
+            unpublished work through it, asked twice, and got no answer. OpenAI leaves the door
+            open itself. That alone changes how people buy AI.
           </p>
 
           <p>
-            This is the demand the bet is built on. Venice does not keep your prompts by default,
-            and on paid tiers they run inside sealed hardware Venice itself cannot read. Every
-            subscription that gets bought for that reason automatically buys VVV on the open market
-            and burns it. That is the link between this story and the numbers below.
+            Venice deletes prompts by default. Paid tiers run them in sealed hardware, hidden
+            even from Venice. Every subscription sold on that basis buys VVV on the open market and
+            burns it. That is the link to the numbers below.
           </p>
         </div>
 
         <div className="border-t p-4 sm:p-5">
           <h3 className="mb-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-faint)]">
-            What Venice actually offers, per its own docs
+            What Venice offers
           </h3>
           <dl className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
             {PRIVACY_MODES.map((m) => (
@@ -145,7 +140,7 @@ export default function WhyNow() {
         <SectionHead
           eyebrow="Press"
           title="Sources and coverage"
-          sub="Read the originals. Where someone is accused of something, the reply sits right next to it."
+          sub="Primary sources, with both sides."
         />
         <ol className="divide-y">
           {PRESS.map((p) => (

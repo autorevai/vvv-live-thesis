@@ -9,7 +9,7 @@ export default function Pillars({ m }: { m: ThesisModel }) {
       <SectionHead
         eyebrow="Pillar grades"
         title="Five things that have to be true"
-        sub="Each one is graded on its own numbers. The headline is a simple count: four or five improving reads strongly strengthening, three reads strengthening, three or more getting worse reads weakening."
+        sub="Each one graded on its own numbers. The headline is a count of how many are improving."
         right={<GradePill grade={m.overall.grade} size="lg">{m.overall.label}</GradePill>}
       />
       <div className="grid grid-cols-1 gap-px bg-[var(--border)] md:grid-cols-2 xl:grid-cols-3">
@@ -34,10 +34,9 @@ export default function Pillars({ m }: { m: ThesisModel }) {
         <article className="flex flex-col justify-center bg-[var(--bg-raised)] p-4 sm:p-5">
           <h3 className="text-[14px] font-semibold tracking-tight">How the grade is built</h3>
           <p className="mt-2 text-[12px] leading-relaxed text-[var(--text-faint)]">
-            No made-up score, and no weightings chosen after seeing the results. Each one compares
-            against its own Day 0 number using a rule set at launch. Business growth sits out until
-            Venice publishes something new, so the headline currently rests on{" "}
-            {m.overall.scored} of the five.
+            Every rule was set at launch and compares against Day 0. Business growth sits out
+            until Venice publishes something new, so the headline rests on {m.overall.scored} of
+            the five.
           </p>
         </article>
       </div>

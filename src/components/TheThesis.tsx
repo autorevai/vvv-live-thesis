@@ -43,7 +43,7 @@ export default function TheThesis({ m }: { m: ThesisModel }) {
         <SectionHead
           eyebrow="The case"
           title="Where these targets come from"
-          sub={`Written on ${DAY_ZERO_LABEL} at ${usd(DAY_ZERO.vvvPrice)}, before the move. Each target is really a company-sized valuation, converted back into a VVV price.`}
+          sub="Each target is a company-sized valuation, turned back into a VVV price."
         />
 
         <div className="border-b p-4 sm:p-5">
@@ -121,7 +121,7 @@ export default function TheThesis({ m }: { m: ThesisModel }) {
         <SectionHead
           eyebrow="How it works"
           title="What has to happen, step by step"
-          sub="Each step is something Venice already built and published. The tracker measures whether it is working."
+          sub="Every step is something Venice already built."
         />
         <ol className="divide-y">
           {FLYWHEEL.map((f, i) => (
@@ -152,8 +152,7 @@ export default function TheThesis({ m }: { m: ThesisModel }) {
           ))}
         </ol>
         <p className="border-t p-4 text-[11px] leading-relaxed text-[var(--text-faint)] sm:px-5">
-          The rest of the page answers one question: is it happening? Everything is measured
-          against Day 0, and the risks were written down in advance.
+          The rest of the page answers one question: is it happening?
         </p>
       </Card>
     </div>

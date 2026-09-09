@@ -10,7 +10,7 @@ export default function Scoreboard({ m }: { m: ThesisModel }) {
       <SectionHead
         eyebrow="Valuation scoreboard"
         title="How far is VVV from each level?"
-        sub="Implied VVV is what one VVV would be worth if VVV were valued like that company today. Multiple is how many times VVV would have to grow to get there. Gap closed is how far it has come from the Day 0 valuation of $225.8M."
+        sub="Implied VVV is the price if VVV were valued like that company today."
       />
       <TableScroll>
         <table className="w-full text-[13px]">

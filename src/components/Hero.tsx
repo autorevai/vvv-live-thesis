@@ -77,9 +77,8 @@ export default function Hero({ m, onOpenSnapshot }: { m: ThesisModel; onOpenSnap
         </div>
 
         <p className="mt-4 max-w-2xl text-[14px] leading-relaxed text-[var(--text-dim)]">
-          A public bet that VVV gets valued closer to the AI companies it competes with, with only{" "}
-          <span className="text-[var(--text)]">{compactNumber(m.freeFloat, 2)} VVV</span> actually
-          available to buy.
+          Only <span className="text-[var(--text)]">{compactNumber(m.freeFloat, 2)} VVV</span> is
+          actually for sale. This bet says it gets valued like the AI companies it competes with.
         </p>
 
         <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-[var(--border)] sm:grid-cols-3 lg:grid-cols-6">

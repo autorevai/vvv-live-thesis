@@ -20,7 +20,7 @@ export const TARGETS: Target[] = [
     label: "Base case",
     thesis: "The first big step up.",
     anchor:
-      "A $1.4B valuation. Venice does not have to win the category to get there. It just has to keep growing from a business already past $100M a year while supply stays tight.",
+      "A $1.4B valuation. Venice only has to keep growing from a business already past $100M a year while supply stays tight.",
   },
   {
     key: "bull",
@@ -28,7 +28,7 @@ export const TARGETS: Target[] = [
     label: "Bull case",
     thesis: "Valued like Stripe valued OpenRouter.",
     anchor:
-      "A $6.95B valuation, which is roughly the $7B Stripe paid for OpenRouter. This is where VVV gets priced like real AI infrastructure.",
+      "A $6.95B valuation. Roughly the $7B Stripe paid for OpenRouter.",
   },
   {
     key: "extreme",
@@ -36,7 +36,7 @@ export const TARGETS: Target[] = [
     label: "Extreme bull",
     thesis: "Worth about what Baseten is worth.",
     anchor:
-      "A $13.9B valuation. That is about what Baseten is worth, and still less than the $17.5B Fireworks raised at.",
+      "A $13.9B valuation. About what Baseten is worth, under the $17.5B Fireworks raised at.",
   },
 ];
 
@@ -44,7 +44,7 @@ export const FLYWHEEL = [
   {
     step: "Revenue grows",
     detail:
-      "Venice was already profitable with over $70M annualized at its July 2026 Series A, and disclosed $100M+ by the time this thesis was frozen.",
+      "Profitable at $70M+ a year by the July 2026 Series A. Past $100M by Day 0.",
     source: {
       name: "TechCrunch, July 1, 2026",
       url: "https://techcrunch.com/2026/07/01/venice-ai-becomes-a-unicorn-with-65m-series-a-as-its-privacy-first-ai-platform-takes-off/",
@@ -53,7 +53,7 @@ export const FLYWHEEL = [
   {
     step: "Revenue buys VVV",
     detail:
-      "Every new subscription automatically buys VVV on the open market and burns it: $2 for Pro, $5 for Pro+, $10 for Max. Venice also buys back on its own on top of that. This happens automatically, it is not a promise.",
+      "Every new subscription buys VVV on the open market and burns it. $2 Pro, $5 Pro+, $10 Max, automatic. Venice buys back on top of that.",
     source: {
       name: "Venice, Programmatic VVV Buy & Burns",
       url: "https://venice.ai/blog/programmatic-vvv-buy-and-burn",
@@ -62,7 +62,7 @@ export const FLYWHEEL = [
   {
     step: "Burned VVV never comes back",
     detail:
-      "The VVV Venice buys is gone for good. Over 33.8M has been burned, about 42% of the original 100M supply.",
+      "Burned VVV is gone for good. Over 33.8M so far, about 42% of the original supply.",
     source: {
       name: "Venice token dashboard",
       url: "https://venice.ai/token/burns",
@@ -71,7 +71,7 @@ export const FLYWHEEL = [
   {
     step: "Usage locks more VVV away",
     detail:
-      "Staked VVV can be locked up to create DIEM, and each DIEM gives you $1 a day of Venice credit for as long as you hold it. So buying compute means locking away VVV, and it stays locked until you give the DIEM back.",
+      "Lock staked VVV to create DIEM. Each DIEM pays $1 a day of Venice credit for as long as you hold it. Buying compute locks VVV away.",
     source: {
       name: "Venice, VVV & DIEM",
       url: "https://docs.venice.ai/overview/vvv-diem",
@@ -80,7 +80,7 @@ export const FLYWHEEL = [
   {
     step: "The sellable float stays small",
     detail:
-      "After burns and staking, only about 13.9M VVV can actually be bought, out of more than 48M in circulation. There is not much for sale.",
+      "About 13.9M VVV is actually buyable, out of 48M in circulation.",
     source: {
       name: "Live on this page",
       url: "https://venice.ai/token",
@@ -88,6 +88,6 @@ export const FLYWHEEL = [
   },
 ];
 
-export const THESIS_STATEMENT = `Venice is a profitable, fast-growing AI business, and very little of its token is actually available to buy. Revenue automatically buys VVV and burns it. Staking holds more of it off the market. New supply is being cut. If that keeps up, VVV should be valued closer to the AI companies it competes with.`;
+export const THESIS_STATEMENT = `Venice is profitable and growing fast, and barely any of its token is for sale. Revenue buys VVV and burns it. Staking locks more away. New supply is being cut. VVV should end up valued closer to the AI companies it competes with.`;
 
-export const THESIS_RISK = `All of it can run backwards. If growth stalls, if the buying slows, or if people unstake and more VVV hits the market, this gets worse, and the page will say so.`;
+export const THESIS_RISK = `It runs backwards too. Growth stalls, buybacks slow, people unstake, and this page will say so.`;

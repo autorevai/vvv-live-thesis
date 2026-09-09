@@ -12,7 +12,7 @@ export default function Methodology({ m }: { m: ThesisModel }) {
         <SectionHead
           eyebrow="Methodology"
           title="What every number on this page means"
-          sub="You can rebuild every number on this page from the formulas below and the sources next to them."
+          sub="Rebuild any number here from the formulas and sources below."
         />
         <div className="space-y-5 p-4 text-[13px] leading-relaxed text-[var(--text-dim)] sm:p-5">
           <Block title="Free-float cap">
@@ -34,16 +34,15 @@ export default function Methodology({ m }: { m: ThesisModel }) {
             <Formula>implied_vvv_price = comparator_valuation / free_float</Formula>
             <Formula>multiple_to_comparator = comparator_valuation / free_float_cap</Formula>
             <p className="text-[var(--text-faint)]">
-              This only compares what the market values each one at. Holding VVV does not give you
-              any ownership of, profit from, or legal claim on the companies it is compared to.
+              This compares valuations only. VVV gives you no ownership, profit or legal claim on
+              any company here.
             </p>
           </Block>
 
           <Block title="What a large number does not mean">
             <p className="text-[var(--text-faint)]">
-              A $10B valuation does not mean $10B has to be spent on VVV. A valuation is just the
-              last traded price multiplied by the supply. It takes far less money than the headline
-              number to move it.
+              A $10B valuation is the last traded price times the supply. Moving it takes far
+              less than $10B.
             </p>
           </Block>
 
@@ -59,15 +58,15 @@ export default function Methodology({ m }: { m: ThesisModel }) {
             </p>
             <Formula>burned = balanceOf(0x0) on the VVV contract</Formula>
             <p className="text-[var(--text-faint)]">
-              The 30-day pace takes what has burned since Day 0 and scales it to 30 days. The
-              dollar figure uses today&apos;s price, not the price paid at the time of each burn.
+              The 30-day pace scales what has burned since Day 0 to 30 days. The dollar figure
+              uses today&apos;s price.
             </p>
           </Block>
 
           <Block title="Business metrics">
             <p className="text-[var(--text-faint)]">
-              Revenue, users and usage have no live feed. Each one is recorded on the day Venice
-              published it, with the date shown. Nothing is guessed for the days in between.
+              Revenue, users and usage have no live feed. Each is recorded on the day Venice
+              published it, with the date shown.
             </p>
           </Block>
         </div>
@@ -129,7 +128,7 @@ export default function Methodology({ m }: { m: ThesisModel }) {
           <SectionHead
             eyebrow="Comparators"
             title="Why these three tokens"
-            sub="Picked at launch and left alone. Swapping in a friendlier comparison later would defeat the point."
+            sub="Picked at launch and left alone."
           />
           <ul className="divide-y">
             {CRYPTO_COMPARATORS.map((c) => (
