@@ -12,7 +12,7 @@ export default function Methodology({ m }: { m: ThesisModel }) {
         <SectionHead
           eyebrow="Methodology"
           title="What every number on this page means"
-          sub="Every figure here is reproducible from the formulas below and the sources listed alongside them."
+          sub="You can rebuild every number on this page from the formulas below and the sources next to them."
         />
         <div className="space-y-5 p-4 text-[13px] leading-relaxed text-[var(--text-dim)] sm:p-5">
           <Block title="Free-float cap">
@@ -34,17 +34,16 @@ export default function Methodology({ m }: { m: ThesisModel }) {
             <Formula>implied_vvv_price = comparator_valuation / free_float</Formula>
             <Formula>multiple_to_comparator = comparator_valuation / free_float_cap</Formula>
             <p className="text-[var(--text-faint)]">
-              These are valuation equivalence exercises. They do not imply that VVV gives holders
-              ownership, cash-flow rights, or any legal claim on the compared companies or
-              protocols.
+              This only compares what the market values each one at. Holding VVV does not give you
+              any ownership of, profit from, or legal claim on the companies it is compared to.
             </p>
           </Block>
 
           <Block title="What a large number does not mean">
             <p className="text-[var(--text-faint)]">
-              A $10B free-float capitalization does not mean $10B of new money has to enter VVV.
-              Market capitalization is the marginal clearing price multiplied across the relevant
-              supply, nothing more.
+              A $10B valuation does not mean $10B has to be spent on VVV. A valuation is just the
+              last traded price multiplied by the supply. It takes far less money than the headline
+              number to move it.
             </p>
           </Block>
 
@@ -60,16 +59,15 @@ export default function Methodology({ m }: { m: ThesisModel }) {
             </p>
             <Formula>burned = balanceOf(0x0) on the VVV contract</Formula>
             <p className="text-[var(--text-faint)]">
-              The 30-day pace shown is tokens burned since Day 0, scaled to a 30-day window. Its USD
-              value is marked at the current price, not at the price paid on each burn.
+              The 30-day pace takes what has burned since Day 0 and scales it to 30 days. The
+              dollar figure uses today&apos;s price, not the price paid at the time of each burn.
             </p>
           </Block>
 
           <Block title="Business metrics">
             <p className="text-[var(--text-faint)]">
-              ARR, users, API calls and tokens processed have no live feed. They are recorded as
-              point-in-time disclosures with a verification date and are never interpolated between
-              reports.
+              Revenue, users and usage have no live feed. Each one is recorded on the day Venice
+              published it, with the date shown. Nothing is guessed for the days in between.
             </p>
           </Block>
         </div>
@@ -99,7 +97,7 @@ export default function Methodology({ m }: { m: ThesisModel }) {
             />
             <Source
               name="DIEM-locked VVV"
-              detail={`Venice token dashboard. No endpoint exposes it, so it is verified by hand.`}
+              detail={`Venice token dashboard. There is no API for it, so it is checked by hand.`}
               stamp={`Verified ${longDate(m.diemLocked.verifiedAt)}`}
               stale
               url={m.diemLocked.sourceUrl}
@@ -131,7 +129,7 @@ export default function Methodology({ m }: { m: ThesisModel }) {
           <SectionHead
             eyebrow="Comparators"
             title="Why these three tokens"
-            sub="Chosen at launch and fixed. Adding a flattering comparator later would defeat the point."
+            sub="Picked at launch and left alone. Swapping in a friendlier comparison later would defeat the point."
           />
           <ul className="divide-y">
             {CRYPTO_COMPARATORS.map((c) => (

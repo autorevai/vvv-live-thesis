@@ -300,7 +300,7 @@ function gradePillars(i: PillarInputs): Pillar[] {
       pending: true,
       headline: "ARR ran $70M+ to $100M+ in under two months",
       detail:
-        "Venice publishes these as point-in-time updates rather than a live feed, so the pillar holds neutral until a figure newer than Day 0 lands. The trajectory into Day 0 was steep: profitable at $70M+ annualized at the July Series A, $100M+ by launch. Nothing here is interpolated between disclosures.",
+        "Venice reports these when it feels like it, not on a live feed, so this holds neutral until a number newer than Day 0 arrives. The run into Day 0 was steep. Profitable at $70M+ a year at the July raise, $100M+ by launch. Nothing is guessed for the gaps.",
       inputs: BUSINESS_METRICS.filter((b) => b.key !== "series-a").map((b) => ({
         label: b.label,
         value: `${b.display} · ${b.effectiveDate.slice(0, 7)}`,
@@ -317,7 +317,7 @@ function gradePillars(i: PillarInputs): Pillar[] {
             ? `Burn pace running ${signed(i.burnPacePct, 0)}% vs Day 0`
             : "Burn pace roughly flat vs Day 0",
       detail:
-        "Measured on-chain. Venice routes programmatic buy-and-burn VVV to the zero address, so the balance there only ever rises. Pace is tokens burned since Day 0, annualised to a 30-day window, compared against the 53.7K VVV burned in the 30 days before launch.",
+        "Read straight off the blockchain. Venice sends the VVV it buys back to a dead address, so that balance only ever goes up. The pace is what has burned since Day 0, scaled to 30 days, against the 53.7K VVV burned in the 30 days before launch.",
       inputs: [
         { label: "Burned since Day 0", value: `${fmtTok(i.burnedSinceDayZero)} VVV` },
         { label: "Implied 30D pace", value: `${fmtTok(i.burnPace30d)} VVV` },
@@ -334,7 +334,7 @@ function gradePillars(i: PillarInputs): Pillar[] {
           ? `Free float down ${m(Math.abs(i.floatChange))}% since Day 0`
           : `Free float up ${m(i.floatChange)}% since Day 0`,
       detail:
-        "The thesis needs the immediately sellable float to shrink. Free float is Venice-reported circulating supply less every VVV committed to the staking contract, which covers plain staking and DIEM locking together.",
+        "This bet needs the amount of VVV people can actually sell to shrink. Free float is the circulating supply Venice reports, minus every VVV locked up in staking.",
       inputs: [
         { label: "Free float", value: `${fmtTok(i.freeFloat)} VVV (${signed(i.floatChange)}%)` },
         { label: "Staked + DIEM-locked", value: `${signed(i.stakedPct)}% vs Day 0` },
@@ -348,7 +348,7 @@ function gradePillars(i: PillarInputs): Pillar[] {
       grade: relative,
       headline: `${m(i.taoMultiple)}x to TAO parity`,
       detail:
-        "How far the free-float cap sits below the comparators. The gap closing is the thesis working. This is a valuation equivalence exercise, not a claim of equivalent rights.",
+        "How far VVV sits below what the market pays for the others. The gap shrinking is the bet working. It compares valuations only, not what owning each one gets you.",
       inputs: [
         { label: "Multiple to TAO", value: `${m(i.taoMultiple)}x` },
         { label: "Multiple to ZEC", value: `${m(i.zecMultiple)}x` },
@@ -362,7 +362,7 @@ function gradePillars(i: PillarInputs): Pillar[] {
       grade: market,
       headline: `VVV ${signed(i.vvvReturn, 0)}% since Day 0`,
       detail:
-        "Price return since Day 0 against the two liquid comparators. Comparator returns shown here are 24-hour moves; the Since Day 0 chart mode carries the full indexed series.",
+        "Price change since Day 0 against the tokens you can actually trade. The figures below are 24-hour moves. The Since Day 0 chart shows the full picture.",
       inputs: [
         { label: "VVV since Day 0", value: `${signed(i.vvvReturn)}%` },
         { label: "TAO 24h", value: `${signed(i.taoReturn)}%` },

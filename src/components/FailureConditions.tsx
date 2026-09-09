@@ -6,35 +6,35 @@ import { Card, SectionHead } from "./ui";
 export default function FailureConditions({ m }: { m: ThesisModel }) {
   const conditions: { text: string; status: "watch" | "tripped" | "clear" }[] = [
     {
-      text: "Venice ARR growth materially slows, or the company stops publishing figures at all",
+      text: "Venice revenue growth slows down, or they just stop publishing the numbers",
       status: "watch",
     },
     {
-      text: "Buy-and-burn activity declines against the 53.7K VVV per 30 days set at Day 0",
+      text: "Venice buys back less VVV than the 53.7K per 30 days it was doing at Day 0",
       status: m.burnPacePct < -10 ? "tripped" : "clear",
     },
     {
-      text: "Free circulating VVV rises materially as staked positions unwind",
+      text: "People unstake, and more VVV becomes available to sell",
       status: m.floatChange > 5 ? "tripped" : m.floatChange > 1 ? "watch" : "clear",
     },
     {
-      text: "Staking and DIEM locking fall, releasing supply back into the float",
+      text: "Staking and DIEM locking drop, putting supply back on the market",
       status: m.stakedPct < -5 ? "tripped" : m.stakedPct < 0 ? "watch" : "clear",
     },
     {
-      text: "Emissions to stakers overwhelm the pace of burns",
+      text: "New VVV paid out to stakers outpaces what gets burned",
       status: "watch",
     },
     {
-      text: "VVV persistently underperforms TAO, ZEC and NEAR from the Day 0 baseline",
+      text: "VVV keeps losing to TAO, ZEC and NEAR from where it started",
       status: m.vvvReturn < 0 ? "tripped" : "clear",
     },
     {
-      text: "Private, uncensored AI stays a niche category rather than becoming infrastructure",
+      text: "Private AI stays a niche thing instead of something companies pay for",
       status: "watch",
     },
     {
-      text: "Venice loses product momentum to the larger inference providers it is priced against",
+      text: "Venice falls behind the bigger AI companies it is being compared to",
       status: "watch",
     },
   ];
@@ -48,9 +48,9 @@ export default function FailureConditions({ m }: { m: ThesisModel }) {
   return (
     <Card>
       <SectionHead
-        eyebrow="Falsifiability"
-        title="How this thesis fails"
-        sub="A thesis that cannot fail is marketing. These are the conditions that would break this one, published at launch and checked against live data where one exists."
+        eyebrow="Risks"
+        title="What would prove this wrong"
+        sub="Written at launch, before the data moved. Where there is a live source, the status updates on its own."
       />
       <ul className="grid grid-cols-1 gap-px bg-[var(--border)] md:grid-cols-2">
         {conditions.map((c) => {
@@ -75,10 +75,6 @@ export default function FailureConditions({ m }: { m: ThesisModel }) {
           );
         })}
       </ul>
-      <p className="border-t p-4 text-[11px] leading-relaxed text-[var(--text-faint)] sm:p-5">
-        Conditions marked Watch have no live feed. They are judged by hand when Venice publishes
-        something new, never inferred from price.
-      </p>
     </Card>
   );
 }

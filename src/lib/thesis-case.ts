@@ -18,25 +18,25 @@ export const TARGETS: Target[] = [
     key: "base",
     price: 100,
     label: "Base case",
-    thesis: "The first major re-rating.",
+    thesis: "The first big step up.",
     anchor:
-      "About $1.4B of free-float capitalization. It does not require Venice to win the category, only to keep compounding from a business already past $100M annualized while the float stays tight.",
+      "A $1.4B valuation. Venice does not have to win the category to get there. It just has to keep growing from a business already past $100M a year while supply stays tight.",
   },
   {
     key: "bull",
     price: 500,
     label: "Bull case",
-    thesis: "VVV's free float reaches what Stripe paid for OpenRouter.",
+    thesis: "Valued like Stripe valued OpenRouter.",
     anchor:
-      "About $6.95B, effectively the $7B OpenRouter acquisition already plotted on the chart. This is the level at which VVV is priced like a serious piece of AI inference infrastructure.",
+      "A $6.95B valuation, which is roughly the $7B Stripe paid for OpenRouter. This is where VVV gets priced like real AI infrastructure.",
   },
   {
     key: "extreme",
     price: 1000,
     label: "Extreme bull",
-    thesis: "Priced with Baseten, still under Fireworks.",
+    thesis: "Worth about what Baseten is worth.",
     anchor:
-      "About $13.9B, around Baseten's reported private valuation and still below the $17.5B Fireworks AI round. Not a fantasy number, a peer number.",
+      "A $13.9B valuation. That is about what Baseten is worth, and still less than the $17.5B Fireworks raised at.",
   },
 ];
 
@@ -53,7 +53,7 @@ export const FLYWHEEL = [
   {
     step: "Revenue buys VVV",
     detail:
-      "Every new subscription triggers an automatic open-market buy and burn, scaled by tier: $2 Pro, $5 Pro+, $10 Max. Discretionary buybacks run in parallel. This is a mechanical link from business activity to token demand, not a promise.",
+      "Every new subscription automatically buys VVV on the open market and burns it: $2 for Pro, $5 for Pro+, $10 for Max. Venice also buys back on its own on top of that. This happens automatically, it is not a promise.",
     source: {
       name: "Venice, Programmatic VVV Buy & Burns",
       url: "https://venice.ai/blog/programmatic-vvv-buy-and-burn",
@@ -62,7 +62,7 @@ export const FLYWHEEL = [
   {
     step: "Burned VVV never comes back",
     detail:
-      "Purchased VVV goes to the burn address permanently. Venice has burned over 33.8M VVV, roughly 42% of the original 100M supply, including the airdrop burn.",
+      "The VVV Venice buys is gone for good. Over 33.8M has been burned, about 42% of the original 100M supply.",
     source: {
       name: "Venice token dashboard",
       url: "https://venice.ai/token/burns",
@@ -71,7 +71,7 @@ export const FLYWHEEL = [
   {
     step: "Usage locks more VVV away",
     detail:
-      "Staked VVV can be locked to mint DIEM, where one staked DIEM yields $1 per day of inference credit in perpetuity. Buying compute means locking the capital asset, and the sVVV stays locked until the DIEM is burned.",
+      "Staked VVV can be locked up to create DIEM, and each DIEM gives you $1 a day of Venice credit for as long as you hold it. So buying compute means locking away VVV, and it stays locked until you give the DIEM back.",
     source: {
       name: "Venice, VVV & DIEM",
       url: "https://docs.venice.ai/overview/vvv-diem",
@@ -80,7 +80,7 @@ export const FLYWHEEL = [
   {
     step: "The sellable float stays small",
     detail:
-      "Burns, staking and DIEM locking together leave a free float near 13.9M VVV against a circulating supply above 48M. Every dollar of demand meets a thin book.",
+      "After burns and staking, only about 13.9M VVV can actually be bought, out of more than 48M in circulation. There is not much for sale.",
     source: {
       name: "Live on this page",
       url: "https://venice.ai/token",
@@ -88,6 +88,6 @@ export const FLYWHEEL = [
   },
 ];
 
-export const THESIS_STATEMENT = `Venice is a profitable, fast-growing AI business whose token has an unusually small immediately sellable float. Revenue mechanically buys and burns VVV, staking and DIEM locking hold supply off the market, and emissions are scheduled to fall. If that keeps compounding, the free-float valuation should converge toward the AI infrastructure companies it is already competing with.`;
+export const THESIS_STATEMENT = `Venice is a profitable, fast-growing AI business, and very little of its token is actually available to buy. Revenue automatically buys VVV and burns it. Staking holds more of it off the market. New supply is being cut. If that keeps up, VVV should be valued closer to the AI companies it competes with.`;
 
-export const THESIS_RISK = `The same mechanics run in reverse. If growth stalls, if burns slow, or if staked positions unwind and the float widens, the thesis weakens and this page will say so.`;
+export const THESIS_RISK = `All of it can run backwards. If growth stalls, if the buying slows, or if people unstake and more VVV hits the market, this gets worse, and the page will say so.`;

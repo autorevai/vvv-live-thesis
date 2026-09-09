@@ -1,6 +1,6 @@
 "use client";
 
-import { DAY_ZERO, DAY_ZERO_LABEL } from "@/lib/constants";
+import { DAY_ZERO_LABEL } from "@/lib/constants";
 import { compactNumber, pct, relativeTime, usd } from "@/lib/format";
 import type { ThesisModel } from "@/lib/thesis";
 import { GradePill } from "./ui";
@@ -76,12 +76,10 @@ export default function Hero({ m, onOpenSnapshot }: { m: ThesisModel; onOpenSnap
           </button>
         </div>
 
-        <p className="mt-5 max-w-2xl text-[14px] leading-relaxed text-[var(--text-dim)]">
-          A falsifiable, public bet on one question: can Venice&apos;s growth, its programmatic
-          buy-and-burn, and staking that locks supply away carry a{" "}
-          <span className="text-[var(--text)]">{compactNumber(m.freeFloat, 2)} VVV</span> free float
-          toward the valuations of TAO, ZEC, NEAR and the private AI infrastructure companies.
-          Called on {DAY_ZERO_LABEL} at {usd(DAY_ZERO.vvvPrice)}, before the move.
+        <p className="mt-4 max-w-2xl text-[14px] leading-relaxed text-[var(--text-dim)]">
+          A public bet that VVV gets valued closer to the AI companies it competes with, with only{" "}
+          <span className="text-[var(--text)]">{compactNumber(m.freeFloat, 2)} VVV</span> actually
+          available to buy.
         </p>
 
         <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-[var(--border)] sm:grid-cols-3 lg:grid-cols-6">

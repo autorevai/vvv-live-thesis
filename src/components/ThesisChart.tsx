@@ -448,14 +448,14 @@ export default function ThesisChart({
       <p className="border-t px-4 py-3 text-[11px] leading-relaxed text-[var(--text-faint)] sm:px-5">
         {mode === "gap" ? (
           <>
-            Each line is the comparator&apos;s market cap divided by VVV&apos;s free-float cap on
-            that day. It falls when VVV gains on the comparator and rises when it loses ground,
-            whichever direction the wider market is moving. Parity is 1.0x.
+            Each line is how many times bigger that comparator is than VVV on the day. It falls
+            when VVV gains ground and rises when it loses ground, whichever way the whole market
+            moved. 1.0x means they are worth the same.
           </>
         ) : mode === "indexed" ? (
           <>
-            Price return only, so this answers which asset moved further, not how close VVV is to
-            catching one. Switch to Gap to parity for that.
+            This shows which one moved more, not how close VVV is to catching them. Switch to Gap
+            to parity for that.
           </>
         ) : (
           <>

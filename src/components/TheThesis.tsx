@@ -41,9 +41,9 @@ export default function TheThesis({ m }: { m: ThesisModel }) {
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.15fr_1fr]">
       <Card>
         <SectionHead
-          eyebrow="The bet"
-          title="What we think VVV is worth, and why"
-          sub={`Written on ${DAY_ZERO_LABEL} at ${usd(DAY_ZERO.vvvPrice)}, before the move. Targets are stated as free-float capitalization first, because that is what gets compared against the companies below.`}
+          eyebrow="The case"
+          title="Where these targets come from"
+          sub={`Written on ${DAY_ZERO_LABEL} at ${usd(DAY_ZERO.vvvPrice)}, before the move. Each target is really a company-sized valuation, converted back into a VVV price.`}
         />
 
         <div className="border-b p-4 sm:p-5">
@@ -119,9 +119,9 @@ export default function TheThesis({ m }: { m: ThesisModel }) {
 
       <Card>
         <SectionHead
-          eyebrow="Why it could happen"
-          title="The mechanism, not the hope"
-          sub="Each link is a published Venice mechanic with a source. The tracker underneath measures whether they are firing."
+          eyebrow="How it works"
+          title="What has to happen, step by step"
+          sub="Each step is something Venice already built and published. The tracker measures whether it is working."
         />
         <ol className="divide-y">
           {FLYWHEEL.map((f, i) => (
@@ -152,8 +152,8 @@ export default function TheThesis({ m }: { m: ThesisModel }) {
           ))}
         </ol>
         <p className="border-t p-4 text-[11px] leading-relaxed text-[var(--text-faint)] sm:px-5">
-          Everything below answers the third question: is it happening? The scorecard grades
-          against Day 0, and the failure conditions were written in advance.
+          The rest of the page answers one question: is it happening? Everything is measured
+          against Day 0, and the risks were written down in advance.
         </p>
       </Card>
     </div>

@@ -43,7 +43,7 @@ export const PRESS: PressItem[] = [
     publisher: "Tristan Buckmaster, NYU",
     title: "Statement accompanying three proofs",
     url: "https://cims.nyu.edu/~tristanb/statement.pdf",
-    note: "The primary document. Read it before forming a view on any of the coverage above.",
+    note: "The original document. Worth reading before the coverage above.",
     kind: "category",
   },
   {
@@ -59,7 +59,7 @@ export const PRESS: PressItem[] = [
     publisher: "Venice",
     title: "Introducing Programmatic VVV Buy & Burns",
     url: "https://venice.ai/blog/programmatic-vvv-buy-and-burn",
-    note: "Every new subscription triggers an automatic open-market buy and burn, scaled by tier. The mechanical link this thesis rests on.",
+    note: "Every new subscription automatically buys VVV on the open market and burns it. This is what the whole bet rests on.",
     kind: "venice",
   },
   {

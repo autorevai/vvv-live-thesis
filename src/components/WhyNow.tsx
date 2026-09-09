@@ -22,8 +22,8 @@ export default function WhyNow() {
       <Card>
         <SectionHead
           eyebrow="Why now"
-          title="Private inference stopped being a preference"
-          sub="The thesis needs demand for private, uncensored AI to keep growing. This week gave that argument its clearest public test."
+          title="Why private AI matters right now"
+          sub="This bet needs demand for private AI to keep growing. This week showed why companies might start paying for it."
         />
 
         <div className="space-y-4 p-4 text-[14px] leading-relaxed text-[var(--text-dim)] sm:p-5">
@@ -53,11 +53,10 @@ export default function WhyNow() {
           </p>
 
           <p className="text-[var(--text-faint)]">
-            That is the demand Venice sells into. Not privacy as a principle, privacy as a property
-            of the infrastructure, with a default of zero retention and hardware attestation
-            available above it. Whether that demand actually shows up is what the burn and staking
-            numbers below measure. Nothing on this page treats a news story as evidence that the
-            thesis is working.
+            That is what Venice sells. It does not store your prompts by default, and paid tiers
+            run them inside sealed hardware. Whether companies actually start paying for that is
+            what the burn and staking numbers below measure. A news story is not proof this bet is
+            working, and nothing here treats it that way.
           </p>
         </div>
 
@@ -94,8 +93,8 @@ export default function WhyNow() {
       <Card>
         <SectionHead
           eyebrow="Press"
-          title="The record, with dates"
-          sub="Primary sources first. Allegations stay attributed to whoever made them, and the responses sit next to them."
+          title="Sources and coverage"
+          sub="Read the originals. Where someone is accused of something, the reply sits right next to it."
         />
         <ol className="divide-y">
           {PRESS.map((p) => (

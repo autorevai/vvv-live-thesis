@@ -55,7 +55,7 @@ export default function DayZeroSnapshot({
         <div className="flex items-start justify-between gap-4 border-b p-5">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--text-faint)]">
-              Immutable baseline
+              The starting line
             </div>
             <h2 className="mt-1.5 text-[19px] font-semibold tracking-tight">
               Day 0 snapshot · {DAY_ZERO_LABEL}
@@ -112,8 +112,8 @@ export default function DayZeroSnapshot({
                 maximumFractionDigits: 0,
               })}
             </span>
-            . Anyone with an archive node can reproduce both, and the two together corroborate the
-            published staked and locked figures above.
+            . Anyone can check both against the blockchain, and together they match the staked and
+            locked figures above.
           </p>
           <p className="mt-3">
             The baseline lives in one source file with a public commit history, so any revision
