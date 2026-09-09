@@ -39,6 +39,21 @@ Burned VVV is `balanceOf(0x0)` on the VVV contract. Venice sends bought-back
 tokens there rather than destroying them, so the ERC-20 `totalSupply` still
 counts them while Venice's reported total supply nets them out.
 
+## Daily snapshots
+
+`.github/workflows/snapshot.yml` runs `scripts/snapshot.mjs` twice a day (the
+second run is a no-op once the day is recorded) and commits one file to
+`data/snapshots/`. Existing files are never overwritten, so the commit history
+is the audit trail. Pushes to `main` deploy automatically, which is how a new
+snapshot reaches the site.
+
+There is no database. The chart's daily history comes from CoinGecko, and the
+Venice-specific series is these committed files.
+
+```sh
+npm run snapshot   # record today locally and rebundle
+```
+
 ## Day 0 is immutable
 
 The baseline lives in `src/lib/constants.ts`. It is never edited after launch,
