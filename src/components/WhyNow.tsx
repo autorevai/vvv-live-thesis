@@ -1,6 +1,6 @@
 "use client";
 
-import { OPENAI_POLICY, OPENAI_QUOTE, PRESS, PRIVACY_MODES } from "@/lib/press";
+import { BUCKMASTER, OPENAI_POLICY, OPENAI_QUOTE, PRESS, PRIVACY_MODES } from "@/lib/press";
 import { longDate } from "@/lib/format";
 import { Card, SectionHead } from "./ui";
 
@@ -22,15 +22,45 @@ export default function WhyNow() {
       <Card>
         <SectionHead
           eyebrow="Why now"
-          title="Your prompts are training data by default"
-          sub="This bet needs companies to start paying for AI that does not keep their work. This week showed exactly why they might."
+          title="This is the whole bet, and it just hit the front page"
+          sub="September 8, 2026. A mathematician put a year of unpublished work into OpenAI's Codex, asked whether they trained on it, and could not get an answer."
         />
 
         <div className="space-y-4 p-4 text-[14px] leading-relaxed text-[var(--text-dim)] sm:p-5">
           <p>
-            OpenAI trains on what you type. On personal ChatGPT and Codex accounts it is on unless
-            you go and turn it off, and turning it off in the obvious place does not cover
-            everything. Both of these are from OpenAI&apos;s own help pages.
+            NYU professor Tristan Buckmaster and Levent Alp&ouml;ge published three proofs on the
+            Navier-Stokes problem, one of the biggest open problems in maths. Buckmaster then
+            published a statement about what happened while they were finishing it. An OpenAI team
+            started on the same narrow approach days after word of his progress reached the company,
+            and released a full proof of the central problem before he could publish.
+          </p>
+
+          <p>
+            He had been running the entire project through Codex. Here is what happened when he
+            asked about it:
+          </p>
+
+          <figure>
+            <blockquote className="rounded-lg border-l-2 border-l-[var(--neg)] bg-[var(--bg)] p-3.5 text-[13px] leading-relaxed text-[var(--text)]">
+              &ldquo;{BUCKMASTER.drafts}&rdquo;
+            </blockquote>
+            <figcaption className="mt-2 text-[11px] text-[var(--text-faint)]">
+              Tristan Buckmaster, NYU, September 8, 2026.{" "}
+              <a
+                href={BUCKMASTER.url}
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-dotted underline-offset-2 hover:text-[var(--text-dim)]"
+              >
+                Full statement
+              </a>
+            </figcaption>
+          </figure>
+
+          <p>
+            He was paying OpenAI out of his own research funds, with no institutional agreement.
+            That matters, because OpenAI treats personal accounts differently from business ones,
+            and it publishes the rule itself:
           </p>
 
           <figure className="space-y-2.5">
@@ -50,44 +80,34 @@ export default function WhyNow() {
               >
                 Read it
               </a>
-              . Business and API accounts are not trained on by default. Personal accounts are.
+              . Training is on by default on personal ChatGPT and Codex accounts, and switching it
+              off in the obvious place does not cover Codex full environments.
             </figcaption>
           </figure>
 
-          <p>
-            On September 8, 2026, a mathematician found out what that means in practice. NYU
-            professor Tristan Buckmaster published three proofs on the Navier-Stokes problem, one of
-            the biggest open problems in maths, along with a statement saying an OpenAI team started
-            working on the same narrow approach after word of his progress reached the company. He
-            had been using Codex heavily throughout.
-          </p>
-
-          <p>
-            OpenAI published its own full proof the same day. It says it never saw his work and that
-            the proofs differ. It also wrote this:
-          </p>
+          <p>And OpenAI, in its own post announcing the proof:</p>
 
           <figure>
             <blockquote className="rounded-lg border-l-2 border-l-[var(--neg)] bg-[var(--bg)] p-3.5 text-[13px] leading-relaxed text-[var(--text)]">
               &ldquo;{OPENAI_QUOTE}&rdquo;
             </blockquote>
             <figcaption className="mt-2 text-[11px] text-[var(--text-faint)]">
-              OpenAI, in its own post on the result.
+              OpenAI. It says it never accessed his work and that the proofs differ.
             </figcaption>
           </figure>
 
-          <p>
-            A company that spent $22.5M of compute in a week cannot say for certain that its models
-            did not learn from a user&apos;s private work. For a mathematician that is a fight over
-            credit. For anyone putting source code, unreleased research or deal documents into a
-            model, it is a straight business risk.
+          <p className="text-[var(--text)]">
+            Put it together. Training is on by default. The opt-out has holes. A researcher put a
+            year of unpublished work through the product, asked twice whether it was trained on, and
+            got no answer. The company itself will not rule it out. You do not need anyone to be
+            proven guilty for this to change how people buy AI.
           </p>
 
-          <p className="text-[var(--text-dim)]">
-            That is what Venice sells. It does not keep your prompts by default, and on paid tiers
-            they run inside sealed hardware that Venice itself cannot read. The whole bet is that
-            more people start caring about that. The burn and staking numbers below are where you
-            find out whether they do.
+          <p>
+            This is the demand the bet is built on. Venice does not keep your prompts by default,
+            and on paid tiers they run inside sealed hardware Venice itself cannot read. Every
+            subscription that gets bought for that reason automatically buys VVV on the open market
+            and burns it. That is the link between this story and the numbers below.
           </p>
         </div>
 

@@ -119,6 +119,12 @@ export const PRIVACY_MODES = [
 export const OPENAI_QUOTE = `While unlikely, we cannot rule out that de-identified data derived from their usage of our products helped improve our models.`;
 
 /** Straight from OpenAI's help centre, updated August 2026. */
+export const BUCKMASTER = {
+  drafts: `I asked whether the model had been trained on, or had access to, our sessions in Codex, into which we had been putting all our drafts for the whole of this project. I was told the model did not look up user data. I asked again, about training, and I did not get an answer.`,
+  personal: `This is not an institutional effort. It is a strictly personal collaboration between the two of us, and there is no formal agreement behind it. I pay for the tools my group uses out of my own research funds, including footing a large bill to OpenAI.`,
+  url: "https://cims.nyu.edu/~tristanb/statement.pdf",
+};
+
 export const OPENAI_POLICY = {
   training: `When you use our services for individuals such as ChatGPT and Codex, we may use your content to train our models.`,
   optOutGap: `Codex has separate controls for allowing training on full environments... Note that adjusting your settings in the ChatGPT interface or privacy portal will not affect these full-environment Codex settings.`,

@@ -112,10 +112,10 @@ export default function Dashboard({
         <Hero m={live} onOpenSnapshot={() => setSnapshotOpen(true)} />
         <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-4 py-6 sm:gap-5 sm:px-6 sm:py-8">
           <Targets m={live} />
+          <WhyNow />
           <ThesisChart history={history} freeFloat={live.freeFloat} />
           <Scoreboard m={live} />
           <TheThesis m={live} />
-          <WhyNow />
           <Pillars m={live} />
           <Scorecard m={live} />
           <DailyRecord rows={daily} />
