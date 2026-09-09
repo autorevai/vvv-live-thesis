@@ -40,6 +40,17 @@ export const DAY_ZERO_ONCHAIN = {
   vvvTotalSupplyOnChain: 114_731_841.436,
 } as const;
 
+/**
+ * Comparator market caps at the Day 0 close, from CoinGecko. Frozen with the
+ * rest of the baseline so the parity gap is always measured from where it
+ * actually started. TAO at 10.0x matches the ~10.2x published at launch.
+ */
+export const DAY_ZERO_COMPARATORS = {
+  tao: 2_267_690_073,
+  zec: 14_214_916_471,
+  near: 2_438_710_684,
+} as const;
+
 /** Base mainnet contracts, from docs.venice.ai/overview/vvv-diem */
 export const CONTRACTS = {
   vvv: "0xacfE6019Ed1A7Dc6f7B508C02d1b04ec88cC21bf",

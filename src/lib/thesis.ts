@@ -1,6 +1,7 @@
 import {
   BUSINESS_METRICS,
   DAY_ZERO,
+  DAY_ZERO_COMPARATORS,
   DAY_ZERO_ONCHAIN,
   DIEM_LOCKED,
   PRICE_MILESTONES,
@@ -124,6 +125,9 @@ export function buildThesis(quotes: MarketQuotes, chain: ChainState, venice: Ven
     burnPaceUsd30d,
     burnPacePct,
     taoMultiple,
+    zecMultiple,
+    nearMultiple,
+    quotes,
   });
 
   return {
@@ -276,7 +280,7 @@ function gradePillars(i: PillarInputs): Pillar[] {
         ? "weakening"
         : "neutral";
 
-  const dayZeroTaoMultiple = 2_300_000_000 / DAY_ZERO.vvvFreeFloatCap;
+  const dayZeroTaoMultiple = DAY_ZERO_COMPARATORS.tao / DAY_ZERO.vvvFreeFloatCap;
   const relative: Grade =
     i.taoMultiple < dayZeroTaoMultiple * 0.95
       ? "strengthening"
@@ -411,11 +415,31 @@ function buildScorecard(a: {
   burnPaceUsd30d: number;
   burnPacePct: number;
   taoMultiple: number;
+  zecMultiple: number;
+  nearMultiple: number;
+  quotes: MarketQuotes;
 }): ScorecardRow[] {
   const sign = (n: number, dp = 1) => (n > 0 ? "+" : "") + n.toFixed(dp) + "%";
   const up = (n: number): Signal => (n > 0.5 ? "positive" : n < -0.5 ? "negative" : "neutral");
   const down = (n: number): Signal => (n < -0.5 ? "positive" : n > 0.5 ? "negative" : "neutral");
-  const dayZeroTaoMultiple = 2_300_000_000 / DAY_ZERO.vvvFreeFloatCap;
+  // Measured from the frozen Day 0 comparator caps, not a moving reference.
+  const dayZero = {
+    tao: DAY_ZERO_COMPARATORS.tao / DAY_ZERO.vvvFreeFloatCap,
+    zec: DAY_ZERO_COMPARATORS.zec / DAY_ZERO.vvvFreeFloatCap,
+    near: DAY_ZERO_COMPARATORS.near / DAY_ZERO.vvvFreeFloatCap,
+  };
+
+  const parityRow = (name: string, then: number, now: number): ScorecardRow => {
+    const change = ((now - then) / then) * 100;
+    return {
+      metric: `Multiple to ${name} parity`,
+      dayZero: then.toFixed(1) + "x",
+      current: now.toFixed(1) + "x",
+      change: sign(change, 0),
+      signal: down(change),
+      rule: "Positive if lower. The gap closing is the thesis working.",
+    };
+  };
 
   return [
     {
@@ -485,14 +509,9 @@ function buildScorecard(a: {
       signal: "neutral",
       rule: "Positive if higher. Baseline starts today.",
     },
-    {
-      metric: "Multiple to TAO parity",
-      dayZero: dayZeroTaoMultiple.toFixed(1) + "x",
-      current: a.taoMultiple.toFixed(1) + "x",
-      change: sign(((a.taoMultiple - dayZeroTaoMultiple) / dayZeroTaoMultiple) * 100, 0),
-      signal: down(((a.taoMultiple - dayZeroTaoMultiple) / dayZeroTaoMultiple) * 100),
-      rule: "Positive if lower",
-    },
+    parityRow("TAO", dayZero.tao, a.taoMultiple),
+    parityRow("ZEC", dayZero.zec, a.zecMultiple),
+    parityRow("NEAR", dayZero.near, a.nearMultiple),
     {
       metric: "Venice ARR",
       dayZero: "$100M+",

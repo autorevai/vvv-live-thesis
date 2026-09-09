@@ -15,8 +15,9 @@ import type { HistoryPayload } from "@/app/api/history/route";
 import { DAY_ZERO_LABEL, PRICE_MILESTONES, PRIVATE_BENCHMARKS } from "@/lib/constants";
 import { compactNumber, longDate, usd } from "@/lib/format";
 
-type Mode = "valuation" | "indexed";
+type Mode = "valuation" | "indexed" | "gap";
 type RangeKey = "1M" | "3M" | "THESIS" | "ALL";
+type SeriesKey = "vvv" | "tao" | "zec" | "near";
 
 const RANGES: { key: RangeKey; label: string }[] = [
   { key: "1M", label: "1M" },
@@ -25,14 +26,49 @@ const RANGES: { key: RangeKey; label: string }[] = [
   { key: "ALL", label: "All" },
 ];
 
-const SERIES = [
-  { key: "vvv", label: "VVV free-float cap", color: "var(--vvv)", width: 2.25 },
-  { key: "tao", label: "TAO market cap", color: "var(--tao)", width: 1.4 },
-  { key: "zec", label: "ZEC market cap", color: "var(--zec)", width: 1.4 },
-  { key: "near", label: "NEAR market cap", color: "var(--near)", width: 1.4 },
-] as const;
+const MODES: { key: Mode; label: string }[] = [
+  { key: "valuation", label: "Valuation" },
+  { key: "indexed", label: "Since Day 0" },
+  { key: "gap", label: "Gap to parity" },
+];
 
-type SeriesKey = (typeof SERIES)[number]["key"];
+const SERIES: { key: SeriesKey; label: string; short: string; color: string; width: number }[] = [
+  { key: "vvv", label: "VVV free-float cap", short: "VVV", color: "var(--vvv)", width: 2.25 },
+  { key: "tao", label: "TAO market cap", short: "TAO", color: "var(--tao)", width: 1.4 },
+  { key: "zec", label: "ZEC market cap", short: "ZEC", color: "var(--zec)", width: 1.4 },
+  { key: "near", label: "NEAR market cap", short: "NEAR", color: "var(--near)", width: 1.4 },
+];
+
+/** VVV against itself is always 1.0x, so it has no place in the gap view. */
+const COMPARATORS = SERIES.filter((s) => s.key !== "vvv");
+
+type ChartRow = {
+  t: number;
+  vvv: number | null;
+  tao: number | null;
+  zec: number | null;
+  near: number | null;
+  vvvPrice: number | null;
+  vvvCap: number | null;
+  taoCap: number | null;
+  zecCap: number | null;
+  nearCap: number | null;
+};
+
+const COPY: Record<Mode, { title: string; sub: string }> = {
+  valuation: {
+    title: "Free-float valuation vs comparators",
+    sub: "Logarithmic. VVV plotted as free-float cap, comparators as full market cap.",
+  },
+  indexed: {
+    title: "Performance since Day 0",
+    sub: `Every asset set to 1.00x on ${DAY_ZERO_LABEL}. Price return only.`,
+  },
+  gap: {
+    title: "How far VVV still has to go",
+    sub: "How many times the free-float cap has to multiply to reach each comparator. Down is the thesis working.",
+  },
+};
 
 export default function ThesisChart({
   history,
@@ -47,6 +83,7 @@ export default function ThesisChart({
   const [showBenchmarks, setShowBenchmarks] = useState(true);
 
   const dayZeroMs = history?.dayZeroMs ?? 0;
+  const active = mode === "gap" ? COMPARATORS : SERIES;
 
   const filtered = useMemo(() => {
     const points = history?.points ?? [];
@@ -63,18 +100,43 @@ export default function ThesisChart({
     return points.filter((p) => p.t >= cut);
   }, [history, range, dayZeroMs]);
 
-  const rows = useMemo(
+  const rows: ChartRow[] = useMemo(
     () =>
-      filtered.map((p) => ({
-        t: p.t,
-        vvv: mode === "valuation" ? p.vvvCap : p.vvvIndex,
-        tao: mode === "valuation" ? p.taoCap : p.taoIndex,
-        zec: mode === "valuation" ? p.zecCap : p.zecIndex,
-        near: mode === "valuation" ? p.nearCap : p.nearIndex,
-        vvvPrice: p.vvvPrice,
-      })),
+      filtered.map((p) => {
+        const gap = (cap: number | null) =>
+          cap !== null && p.vvvCap ? cap / p.vvvCap : null;
+        return {
+          t: p.t,
+          vvv: mode === "valuation" ? p.vvvCap : mode === "indexed" ? p.vvvIndex : null,
+          tao: mode === "valuation" ? p.taoCap : mode === "indexed" ? p.taoIndex : gap(p.taoCap),
+          zec: mode === "valuation" ? p.zecCap : mode === "indexed" ? p.zecIndex : gap(p.zecCap),
+          near:
+            mode === "valuation" ? p.nearCap : mode === "indexed" ? p.nearIndex : gap(p.nearCap),
+          vvvPrice: p.vvvPrice,
+          vvvCap: p.vvvCap,
+          taoCap: p.taoCap,
+          zecCap: p.zecCap,
+          nearCap: p.nearCap,
+        };
+      }),
     [filtered, mode],
   );
+
+  /** Day 0 gap per comparator, so the legend can show progress rather than a bare number. */
+  const gapProgress = useMemo(() => {
+    if (mode !== "gap") return null;
+    const all = history?.points ?? [];
+    const atDayZero = all.find((p) => p.t >= dayZeroMs);
+    const latest = all[all.length - 1];
+    if (!atDayZero || !latest) return null;
+    const at = (p: typeof latest, cap: "taoCap" | "zecCap" | "nearCap") =>
+      p[cap] !== null && p.vvvCap ? (p[cap] as number) / p.vvvCap : null;
+    return {
+      tao: { then: at(atDayZero, "taoCap"), now: at(latest, "taoCap") },
+      zec: { then: at(atDayZero, "zecCap"), now: at(latest, "zecCap") },
+      near: { then: at(atDayZero, "nearCap"), now: at(latest, "nearCap") },
+    } as Record<string, { then: number | null; now: number | null }>;
+  }, [mode, history, dayZeroMs]);
 
   const benchmarks = useMemo(() => {
     if (mode !== "valuation" || !showBenchmarks) return [];
@@ -95,7 +157,7 @@ export default function ThesisChart({
   const domain = useMemo<[number, number]>(() => {
     const vals: number[] = [];
     for (const r of rows) {
-      for (const k of SERIES) {
+      for (const k of active) {
         if (hidden.has(k.key)) continue;
         const v = r[k.key];
         if (typeof v === "number" && v > 0) vals.push(v);
@@ -105,15 +167,25 @@ export default function ThesisChart({
     if (!vals.length) return [1, 10];
     const lo = Math.min(...vals);
     const hi = Math.max(...vals);
-    if (mode === "indexed") return [Math.min(0.9, lo * 0.97), Math.max(1.1, hi * 1.05)];
+    if (mode === "indexed") return [Math.min(0.95, lo * 0.98), Math.max(1.05, hi * 1.03)];
+    // Do not drag parity (1.0x) into the domain. On a log axis that squashes a
+    // 7x-to-60x spread into the top third and hides the movement, which is the
+    // only thing this view exists to show.
+    if (mode === "gap") return [lo * 0.75, hi * 1.25];
     return [lo * 0.62, hi * 1.5];
-  }, [rows, hidden, benchmarks, mode]);
+  }, [rows, hidden, benchmarks, mode, active]);
 
-  // Recharts packs a log axis with ticks. Pick clean decade and half-decade
-  // steps inside the domain instead, so the labels stay readable.
+  // Recharts packs a log axis with ticks and picks ragged linear ones. Choose
+  // decade steps for log modes and round steps for the indexed view.
   const ticks = useMemo(() => {
     const [lo, hi] = domain;
-    if (mode === "indexed") return undefined;
+    if (mode === "indexed") {
+      const span = hi - lo;
+      const step = span > 1 ? 0.25 : span > 0.4 ? 0.1 : 0.05;
+      const out: number[] = [];
+      for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) out.push(Number(v.toFixed(2)));
+      return out.length > 2 ? out : undefined;
+    }
     const out: number[] = [];
     for (let e = Math.floor(Math.log10(lo)); e <= Math.ceil(Math.log10(hi)); e++) {
       for (const m of [1, 2, 5]) {
@@ -130,79 +202,74 @@ export default function ThesisChart({
    * with the one above it. The scoreboard below carries the full list.
    */
   const labelled = useMemo(() => {
-    if (!benchmarks.length) return benchmarks.map((b) => ({ ...b, showLabel: true }));
+    if (!benchmarks.length) return [] as (typeof benchmarks[number] & { showLabel: boolean })[];
     const [lo, hi] = domain;
     const span = Math.log10(hi) - Math.log10(lo);
-    const minGap = 0.045; // ~4.5% of the plot height
-    const sorted = [...benchmarks].sort((a, b) => b.y - a.y);
     let lastPos = Infinity;
-    return sorted.map((b) => {
-      const pos = (Math.log10(hi) - Math.log10(b.y)) / span;
-      const showLabel = pos - lastPos > minGap || lastPos === Infinity;
-      if (showLabel) lastPos = pos;
-      return { ...b, showLabel };
-    });
+    return [...benchmarks]
+      .sort((a, b) => b.y - a.y)
+      .map((b) => {
+        const pos = (Math.log10(hi) - Math.log10(b.y)) / span;
+        const showLabel = lastPos === Infinity || pos - lastPos > 0.045;
+        if (showLabel) lastPos = pos;
+        return { ...b, showLabel };
+      });
   }, [benchmarks, domain]);
 
   const toggle = (k: SeriesKey) =>
     setHidden((prev) => {
       const next = new Set(prev);
       if (next.has(k)) next.delete(k);
-      else if (next.size < SERIES.length - 1) next.add(k);
+      else if (active.filter((s) => !next.has(s.key)).length > 1) next.add(k);
       return next;
     });
 
-  const loading = !history;
+  const axisFormat = (v: number) =>
+    mode === "valuation" ? "$" + compactNumber(v, 0) : v.toFixed(2) + "x";
 
   return (
     <section className="rounded-xl border bg-[var(--bg-raised)]">
       <div className="flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div>
-          <h2 className="text-[15px] font-semibold tracking-tight">
-            {mode === "valuation" ? "Free-float valuation vs comparators" : "Performance since Day 0"}
-          </h2>
+          <h2 className="text-[15px] font-semibold tracking-tight">{COPY[mode].title}</h2>
           <p className="mt-1 text-[12px] leading-relaxed text-[var(--text-faint)]">
-            {mode === "valuation"
-              ? "Logarithmic. VVV plotted as free-float cap, comparators as full market cap."
-              : `Every asset set to 1.00x on ${DAY_ZERO_LABEL}. Price return only.`}
+            {COPY[mode].sub}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Segmented
-            options={[
-              { key: "valuation", label: "Valuation" },
-              { key: "indexed", label: "Since Day 0" },
-            ]}
-            value={mode}
-            onChange={(v) => setMode(v as Mode)}
-          />
-          <Segmented
-            options={RANGES.map((r) => ({ key: r.key, label: r.label }))}
-            value={range}
-            onChange={(v) => setRange(v as RangeKey)}
-          />
+          <Segmented options={MODES} value={mode} onChange={(v) => setMode(v as Mode)} />
+          <Segmented options={RANGES} value={range} onChange={(v) => setRange(v as RangeKey)} />
         </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-4 pt-4 sm:px-5">
-        {SERIES.map((s) => {
+        {active.map((s) => {
           const off = hidden.has(s.key);
+          const p = gapProgress?.[s.key];
           return (
             <button
               key={s.key}
               onClick={() => toggle(s.key)}
-              className="group flex items-center gap-2 text-[12px] transition-opacity"
+              className="group flex items-baseline gap-2 text-[12px] transition-opacity"
               style={{ opacity: off ? 0.35 : 1 }}
               aria-pressed={!off}
             >
               <span
-                className="h-[3px] w-4 rounded-full"
+                className="h-[3px] w-4 shrink-0 translate-y-[-3px] rounded-full"
                 style={{ background: s.color }}
                 aria-hidden
               />
               <span className="text-[var(--text-dim)] group-hover:text-[var(--text)]">
-                {mode === "indexed" ? s.label.split(" ")[0] : s.label}
+                {mode === "valuation" ? s.label : s.short}
               </span>
+              {p?.then != null && p.now != null && (
+                <span className="tnum text-[11px] text-[var(--text-faint)]">
+                  {p.then.toFixed(1)}x →{" "}
+                  <span style={{ color: p.now < p.then ? "var(--pos)" : "var(--neg)" }}>
+                    {p.now.toFixed(1)}x
+                  </span>
+                </span>
+              )}
             </button>
           );
         })}
@@ -218,7 +285,7 @@ export default function ThesisChart({
       </div>
 
       <div className="h-[380px] w-full px-1 pb-2 pt-3 sm:h-[480px] sm:px-2">
-        {loading ? (
+        {!history ? (
           <div className="flex h-full items-center justify-center text-[13px] text-[var(--text-faint)]">
             Loading history…
           </div>
@@ -251,15 +318,13 @@ export default function ThesisChart({
                 dy={6}
               />
               <YAxis
-                scale={mode === "valuation" ? "log" : "linear"}
+                scale={mode === "indexed" ? "linear" : "log"}
                 domain={domain}
                 allowDataOverflow
                 orientation="right"
                 width={58}
                 ticks={ticks}
-                tickFormatter={(v) =>
-                  mode === "valuation" ? "$" + compactNumber(v, 0) : v.toFixed(2) + "x"
-                }
+                tickFormatter={axisFormat}
                 tick={{ fill: "var(--text-faint)", fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
@@ -274,6 +339,21 @@ export default function ThesisChart({
                     value: "Day 0 = 1.00x",
                     position: "insideTopLeft",
                     fill: "var(--text-faint)",
+                    fontSize: 10,
+                  }}
+                />
+              )}
+
+              {mode === "gap" && domain[0] <= 1 && (
+                <ReferenceLine
+                  y={1}
+                  stroke="var(--pos)"
+                  strokeDasharray="4 4"
+                  strokeOpacity={0.7}
+                  label={{
+                    value: "Parity",
+                    position: "insideTopLeft",
+                    fill: "var(--pos)",
                     fontSize: 10,
                   }}
                 />
@@ -316,7 +396,7 @@ export default function ThesisChart({
                 />
               )}
 
-              {!hidden.has("vvv") && (
+              {mode !== "gap" && !hidden.has("vvv") && (
                 <Area
                   type="monotone"
                   dataKey="vvv"
@@ -327,21 +407,23 @@ export default function ThesisChart({
                 />
               )}
 
-              {SERIES.filter((s) => s.key !== "vvv" && !hidden.has(s.key)).map((s) => (
-                <Line
-                  key={s.key}
-                  type="monotone"
-                  dataKey={s.key}
-                  stroke={s.color}
-                  strokeWidth={s.width}
-                  dot={false}
-                  activeDot={{ r: 3, strokeWidth: 0 }}
-                  isAnimationActive={false}
-                  connectNulls
-                />
-              ))}
+              {active
+                .filter((s) => s.key !== "vvv" && !hidden.has(s.key))
+                .map((s) => (
+                  <Line
+                    key={s.key}
+                    type="monotone"
+                    dataKey={s.key}
+                    stroke={s.color}
+                    strokeWidth={mode === "gap" ? 2 : s.width}
+                    dot={false}
+                    activeDot={{ r: 3, strokeWidth: 0 }}
+                    isAnimationActive={false}
+                    connectNulls
+                  />
+                ))}
 
-              {!hidden.has("vvv") && (
+              {mode !== "gap" && !hidden.has("vvv") && (
                 <Line
                   type="monotone"
                   dataKey="vvv"
@@ -363,15 +445,28 @@ export default function ThesisChart({
         )}
       </div>
 
-      {mode === "valuation" && (
-        <p className="border-t px-4 py-3 text-[11px] leading-relaxed text-[var(--text-faint)] sm:px-5">
-          The historical free-float cap line applies today&apos;s free float of{" "}
-          <span className="tnum text-[var(--text-dim)]">{compactNumber(freeFloat, 2)} VVV</span> to
-          each day&apos;s VVV close. Free float was {compactNumber(13_600_000, 2)} at Day 0, so the
-          scaling shifts the line by under 3 percent. Daily float snapshots start accumulating from
-          launch and will replace this once the series is long enough to stand on its own.
-        </p>
-      )}
+      <p className="border-t px-4 py-3 text-[11px] leading-relaxed text-[var(--text-faint)] sm:px-5">
+        {mode === "gap" ? (
+          <>
+            Each line is the comparator&apos;s market cap divided by VVV&apos;s free-float cap on
+            that day. It falls when VVV gains on the comparator and rises when it loses ground,
+            whichever direction the wider market is moving. Parity is 1.0x.
+          </>
+        ) : mode === "indexed" ? (
+          <>
+            Price return only, so this answers which asset moved further, not how close VVV is to
+            catching one. Switch to Gap to parity for that.
+          </>
+        ) : (
+          <>
+            The historical free-float cap line applies today&apos;s free float of{" "}
+            <span className="tnum text-[var(--text-dim)]">{compactNumber(freeFloat, 2)} VVV</span> to
+            each day&apos;s VVV close. Free float was {compactNumber(13_600_000, 2)} at Day 0, so the
+            scaling shifts the line by under 3 percent. Daily float snapshots start accumulating from
+            launch and will replace this once the series is long enough to stand on its own.
+          </>
+        )}
+      </p>
     </section>
   );
 }
@@ -405,20 +500,8 @@ function Segmented({
   );
 }
 
-type TooltipRow = { name: string; value: number; color: string };
-
-type ChartRow = {
-  t: number;
-  vvv: number | null;
-  tao: number | null;
-  zec: number | null;
-  near: number | null;
-  vvvPrice: number | null;
-};
-
 function ChartTooltip({
   active,
-  payload,
   label,
   mode,
   freeFloat,
@@ -426,57 +509,78 @@ function ChartTooltip({
   rows,
 }: {
   active?: boolean;
-  payload?: { dataKey: string; value: number }[];
+  payload?: unknown;
   label?: number;
   mode: Mode;
   freeFloat: number;
   hidden: Set<SeriesKey>;
   rows: ChartRow[];
 }) {
-  if (!active || !payload?.length || label === undefined) return null;
+  const row = label === undefined ? undefined : rows.find((r) => r.t === label);
+  if (!active || !row) return null;
 
-  // Read straight from the row: vvvPrice is carried for the tooltip but never
-  // drawn, so it does not appear in the payload Recharts hands over.
-  const row = rows.find((r) => r.t === label);
-  const get = (k: keyof ChartRow) => (row?.[k] ?? null) as number | null;
-  const vvv = get("vvv");
-  const price = get("vvvPrice");
-
-  const lines: TooltipRow[] = SERIES.filter((s) => !hidden.has(s.key))
-    .map((s) => ({ name: s.label, value: get(s.key) as number, color: s.color }))
-    .filter((r) => typeof r.value === "number" && Number.isFinite(r.value));
-
-  const taoCap = get("tao");
+  const shown = (mode === "gap" ? COMPARATORS : SERIES).filter((s) => !hidden.has(s.key));
+  const caps = { tao: row.taoCap, zec: row.zecCap, near: row.nearCap } as const;
 
   return (
-    <div className="min-w-[248px] rounded-lg border border-[var(--border-strong)] bg-[var(--bg-raised)] p-3 shadow-2xl">
+    <div className="min-w-[262px] rounded-lg border border-[var(--border-strong)] bg-[var(--bg-raised)] p-3 shadow-2xl">
       <div className="mb-2 text-[11px] font-medium uppercase tracking-wider text-[var(--text-faint)]">
-        {longDate(new Date(label).toISOString().slice(0, 10))}
+        {longDate(new Date(row.t).toISOString().slice(0, 10))}
       </div>
+
       <dl className="space-y-1.5 text-[12px]">
-        {mode === "valuation" && typeof price === "number" && (
-          <Row label="VVV price" value={usd(price)} />
+        {mode === "valuation" && row.vvvPrice !== null && (
+          <Row label="VVV price" value={usd(row.vvvPrice)} />
         )}
-        {lines.map((r) => (
-          <div key={r.name} className="flex items-center justify-between gap-6">
-            <dt className="flex items-center gap-2 text-[var(--text-dim)]">
-              <span
-                className="h-[3px] w-3 rounded-full"
-                style={{ background: r.color }}
-                aria-hidden
-              />
-              {mode === "indexed" ? r.name.split(" ")[0] : r.name}
-            </dt>
-            <dd className="tnum font-medium">
-              {mode === "valuation" ? "$" + compactNumber(r.value, 2) : r.value.toFixed(2) + "x"}
-            </dd>
-          </div>
-        ))}
-        {mode === "valuation" && typeof vvv === "number" && typeof taoCap === "number" && (
+
+        {shown.map((s) => {
+          const v = row[s.key];
+          if (typeof v !== "number" || !Number.isFinite(v)) return null;
+          return (
+            <div key={s.key} className="flex items-center justify-between gap-6">
+              <dt className="flex items-center gap-2 text-[var(--text-dim)]">
+                <span
+                  className="h-[3px] w-3 rounded-full"
+                  style={{ background: s.color }}
+                  aria-hidden
+                />
+                {mode === "valuation" ? s.label : s.short}
+              </dt>
+              <dd className="tnum font-medium">
+                {mode === "valuation" ? "$" + compactNumber(v, 2) : v.toFixed(2) + "x"}
+              </dd>
+            </div>
+          );
+        })}
+
+        {/* Distance to every comparator, not just TAO. */}
+        {mode !== "gap" && row.vvvCap && (
           <>
             <div className="my-1.5 border-t" />
-            <Row label="VVV / TAO" value={(vvv / taoCap).toFixed(3) + "x"} />
-            <Row label="Multiple to TAO" value={(taoCap / vvv).toFixed(1) + "x"} />
+            <div className="mb-1 text-[10px] font-medium uppercase tracking-wider text-[var(--text-faint)]">
+              Distance to parity
+            </div>
+            {COMPARATORS.map((s) => {
+              const cap = caps[s.key as "tao" | "zec" | "near"];
+              if (cap === null || !row.vvvCap) return null;
+              return (
+                <div key={s.key} className="flex items-center justify-between gap-6">
+                  <dt className="text-[var(--text-dim)]">
+                    {s.short}
+                    <span className="tnum ml-1.5 text-[var(--text-faint)]">
+                      VVV / {s.short} {(row.vvvCap / cap).toFixed(3)}x
+                    </span>
+                  </dt>
+                  <dd className="tnum font-medium">{(cap / row.vvvCap).toFixed(1)}x</dd>
+                </div>
+              );
+            })}
+          </>
+        )}
+
+        {mode === "valuation" && (
+          <>
+            <div className="my-1.5 border-t" />
             <Row label="Free float applied" value={compactNumber(freeFloat, 2) + " VVV"} />
           </>
         )}
