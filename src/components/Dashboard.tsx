@@ -14,6 +14,7 @@ import Scoreboard from "./Scoreboard";
 import Scorecard from "./Scorecard";
 import TheThesis from "./TheThesis";
 import ThesisChart from "./ThesisChart";
+import WhyNow from "./WhyNow";
 import TopBar from "./TopBar";
 
 const LIVE_POLL_MS = 60_000;
@@ -110,6 +111,7 @@ export default function Dashboard({
         <Hero m={live} onOpenSnapshot={() => setSnapshotOpen(true)} />
         <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-4 py-6 sm:gap-5 sm:px-6 sm:py-8">
           <TheThesis m={live} />
+          <WhyNow />
           <ThesisChart history={history} freeFloat={live.freeFloat} />
           <Scoreboard m={live} />
           <Pillars m={live} />
