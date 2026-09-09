@@ -16,6 +16,10 @@ const POS = "#2ecc82";
 const NEG = "#f4585c";
 const ACCENT = "#5b9dff";
 
+const SITE = (process.env.NEXT_PUBLIC_SITE_URL ?? "vvv-live-thesis.vercel.app")
+  .replace(/^https?:\/\//, "")
+  .replace(/\/$/, "");
+
 export async function GET() {
   let stats: {
     price: string;
@@ -24,6 +28,7 @@ export async function GET() {
     grade: string;
     good: boolean;
     ret: string;
+    float: string;
   };
 
   try {
@@ -37,6 +42,7 @@ export async function GET() {
       grade: m.overall.label,
       good: m.overall.grade !== "weakening",
       ret: (m.vvvReturn > 0 ? "+" : "") + m.vvvReturn.toFixed(0) + "%",
+      float: (m.freeFloat / 1e6).toFixed(2) + "M",
     };
   } catch {
     stats = {
@@ -46,6 +52,7 @@ export async function GET() {
       grade: "Live data unavailable",
       good: true,
       ret: "—",
+      float: "—",
     };
   }
 
@@ -59,7 +66,7 @@ export async function GET() {
           flexDirection: "column",
           background: BG,
           color: FG,
-          padding: 68,
+          padding: 64,
           fontFamily: "sans-serif",
         }}
       >
@@ -73,7 +80,7 @@ export async function GET() {
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 44 }}>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 40 }}>
           <div style={{ fontSize: 108, fontWeight: 700, letterSpacing: -4, lineHeight: 1 }}>
             {stats.price}
           </div>
@@ -107,9 +114,9 @@ export async function GET() {
 
         <div style={{ display: "flex", gap: 1, marginTop: "auto", background: LINE, borderRadius: 14 }}>
           {[
-            { k: "Free-float cap", v: stats.cap },
-            { k: "To TAO parity", v: stats.tao },
-            { k: "Comparators", v: "TAO · ZEC · NEAR" },
+            { k: "FREE-FLOAT CAP", v: stats.cap },
+            { k: "FREE FLOAT", v: stats.float + " VVV" },
+            { k: "TO TAO PARITY", v: stats.tao },
           ].map((t, i) => (
             <div
               key={t.k}
@@ -131,11 +138,19 @@ export async function GET() {
           ))}
         </div>
 
-        <div style={{ display: "flex", marginTop: 26, fontSize: 20, color: DIM }}>
-          {"Free-float valuation, buy-and-burn and staking, tracked live against TAO, ZEC, NEAR, OpenRouter, Baseten and Fireworks."}
-        </div>
-        <div style={{ display: "flex", marginTop: 10, fontSize: 20, color: ACCENT }}>
-          vvvthesis.com
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: 22,
+            fontSize: 20,
+          }}
+        >
+          <div style={{ display: "flex", color: DIM }}>
+            {"Tracked live vs TAO · ZEC · NEAR · OpenRouter · Baseten · Fireworks"}
+          </div>
+          <div style={{ display: "flex", color: ACCENT }}>{SITE}</div>
         </div>
       </div>
     ),
