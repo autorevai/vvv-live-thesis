@@ -3,11 +3,15 @@
  * Bundles data/snapshots/*.json into one module the app imports statically, so
  * the series ships with the build instead of relying on filesystem tracing.
  */
-import { readFile, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const SRC = path.join(process.cwd(), "data", "snapshots");
 const OUT = path.join(process.cwd(), "src", "data", "snapshots.json");
+
+// The generated file is gitignored, so on a clean checkout this directory does
+// not exist yet. Create it before writing.
+await mkdir(path.dirname(OUT), { recursive: true });
 
 const files = (await readdir(SRC)).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort();
 const rows = [];
