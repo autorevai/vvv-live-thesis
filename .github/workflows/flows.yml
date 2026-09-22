@@ -1,0 +1,67 @@
+name: Daily on-chain custody and flows
+
+on:
+  schedule:
+    # 01:10 UTC. Late enough that the previous UTC day is closed and Base has
+    # had time to settle, and clear of the 00:20 snapshot job.
+    - cron: "10 1 * * *"
+    # A retry pass. The script is a no-op once the day is already on record.
+    - cron: "10 4 * * *"
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Number of past days to fill in, skipping any already recorded"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-flows
+  cancel-in-progress: false
+
+jobs:
+  flows:
+    runs-on: ubuntu-latest
+    # A full day is roughly 150k transfer logs plus a few hundred address
+    # lookups against a public node, so give it room.
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Custody runs first and is the one that must not be skipped: it is a
+      # handful of balance reads, it needs no archive access, and it is the
+      # series the site leans on. The transfer scan is heavier and allowed to
+      # fail without taking the day's custody reading down with it.
+      - name: Record custody
+        env:
+          BASE_RPC_URL: ${{ secrets.BASE_CUSTODY_RPC_URL }}
+        run: node scripts/custody.mjs
+
+      - name: Record flows
+        continue-on-error: true
+        env:
+          BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+        run: |
+          if [ -n "${{ inputs.backfill }}" ]; then
+            node scripts/flows.mjs --backfill "${{ inputs.backfill }}"
+          else
+            node scripts/flows.mjs
+          fi
+
+      - name: Commit
+        run: |
+          if [ -z "$(git status --porcelain data/flows data/custody data/address-labels.json)" ]; then
+            echo "Nothing new to record."
+            exit 0
+          fi
+          git config user.name "vvv-thesis-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/flows data/custody data/address-labels.json
+          git commit -m "data: on-chain custody and flows $(date -u +%Y-%m-%d)"
+          git push

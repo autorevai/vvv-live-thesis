@@ -1,0 +1,187 @@
+{
+  "source": "https://arkm.com/explorer/token/venice-token",
+  "retrieved_at": "2026-09-22T06:44:00.979909Z",
+  "note": "Entity labels as published by Arkham on the public Venice Token page. Balances were read separately from Base and are not stored here.",
+  "addresses": {
+    "0x01784ef301d79e4b2df3a21ad9a536d4cf09a5ce": {
+      "entity": "aerodrome-finance",
+      "label": "Volatile AMM - WETH/VVV (VAMM-WETH/VVV) (0x017)",
+      "kind": "pool"
+    },
+    "0xbb345d35450bf9ee76f3d2ce214e8e7ac5e1071d": {
+      "entity": "aerodrome-finance",
+      "label": "Volatile AMM - VVV/DIEM (VAMM-VVV/DIEM) (0xbB3)",
+      "kind": "pool"
+    },
+    "0x01271a205e3f37cbfc9b353170d726060e193c0d": {
+      "entity": "aerodrome-finance",
+      "label": "CLPool (0x012)",
+      "kind": "pool"
+    },
+    "0xc333e80ef2dec2805f239e3f1e810612d294f771": {
+      "entity": "b2c2",
+      "label": "(0xC33)",
+      "kind": "market-maker"
+    },
+    "0x6cc42a0b5d130591a36d5567ab04f822fa2bb172": {
+      "entity": "bob-the-builder",
+      "label": "bob-the-builder.eth (0x6Cc)",
+      "kind": "block-builder"
+    },
+    "0xbaed383ede0e5d9d72430661f3285daa77e9439f": {
+      "entity": "bybit",
+      "label": "Hot Wallet (0xBae)",
+      "kind": "exchange"
+    },
+    "0x0810a411a9c4f4c9dd0cb5d95dfb9aa95a02f043": {
+      "entity": "coinbase",
+      "label": "0x0810A411a9c4f4c9dd0Cb5d95dFb9Aa95a02f043",
+      "kind": "exchange"
+    },
+    "0x323dd264edd7dcc706a85652a3d15ddaed3ef0e1": {
+      "entity": "coinbase",
+      "label": "0x323dD264edd7dCC706A85652A3D15dDAed3eF0E1",
+      "kind": "exchange"
+    },
+    "0x419eedf956b684521a463252e9a90ba915615eab": {
+      "entity": "coinbase",
+      "label": "0x419Eedf956b684521A463252e9A90Ba915615EaB",
+      "kind": "exchange"
+    },
+    "0x3f9aa1cc4ead6c227062c1c13e6d928d9a1166db": {
+      "entity": "coinbase",
+      "label": "Cold Wallet (0x3f9)",
+      "kind": "exchange"
+    },
+    "0xe3343cb3113cef59ec25ff3f333c521dfa326917": {
+      "entity": "coinbase",
+      "label": "(0xE33)",
+      "kind": "exchange"
+    },
+    "0xfb7a1b1d6e74c2f5c4e35e8f3a9aa2b187e8dfb7": {
+      "entity": "eureka-builder",
+      "label": "0xFB7 (0xfB7)",
+      "kind": "block-builder"
+    },
+    "0xc882b111a75c0c657fc507c04fbfcd2cc984f071": {
+      "entity": "gate-io",
+      "label": "Cold Wallet (0xC88)",
+      "kind": "exchange"
+    },
+    "0x0d0707963952f2fba59dd06f2b425ace40b492fe": {
+      "entity": "gate-io",
+      "label": "Hot Wallet (0x0D0)",
+      "kind": "exchange"
+    },
+    "0xb7f2676d4e8aea23e57ca8c8a5aa5c1f1cabf0b7": {
+      "entity": "grayscale",
+      "label": "Coinbase Prime Custody (0xB7F)",
+      "kind": "fund"
+    },
+    "0x44a3e0f35fe1f2fbaa4310873a8a8125babec61b": {
+      "entity": "kraken",
+      "label": "Hot Wallet (0x44a)",
+      "kind": "exchange"
+    },
+    "0xd2dd7b597fd2435b6db61ddf48544fd931e6869f": {
+      "entity": "kraken",
+      "label": "Cold Wallet (0xd2D)",
+      "kind": "exchange"
+    },
+    "0x7dafba1d69f6c01ae7567ffd7b046ca03b706f83": {
+      "entity": "kraken",
+      "label": "Cold Wallet (0x7DA)",
+      "kind": "exchange"
+    },
+    "0xcc282e2004428939ee5149a9e7872f0b4d5d5ec7": {
+      "entity": "kraken",
+      "label": "Hot Wallet (0xcC2)",
+      "kind": "exchange"
+    },
+    "0x18b0f4547a89fe4c5fe84f258bea3601fa281e9f": {
+      "entity": "kucoin",
+      "label": "Hot Wallet (0x18b)",
+      "kind": "exchange"
+    },
+    "0x4e3ae00e8323558fa5cac04b152238924aa31b60": {
+      "entity": "mexc",
+      "label": "Hot Wallet (0x4e3)",
+      "kind": "exchange"
+    },
+    "0xd64bcb70c613a6d1f4d7d57ba64bb4a0767a9682": {
+      "entity": "moonwell",
+      "label": "Moonwell VVV (MVVV) (0xD64)",
+      "kind": "lending"
+    },
+    "0x2cff890f0378a11913b6129b2e97417a2c302680": {
+      "entity": "near-intents",
+      "label": "Bridge Hot Wallet (0x2Cf)",
+      "kind": "bridge"
+    },
+    "0xc8802feab2fafb48b7d1ade77e197002c210f391": {
+      "entity": "okx",
+      "label": "Hot Wallet (0xc88)",
+      "kind": "exchange"
+    },
+    "0xfd4fa5533e236037088adebb9b1b2ff2672f442e": {
+      "entity": "okx",
+      "label": "Hot Wallet (0xFD4)",
+      "kind": "exchange"
+    },
+    "0x8a6c37c27e3fb1ce9bf1db3d8d95bd9f319b6a01": {
+      "entity": "quasar-builder",
+      "label": "quasarbuilder.eth (0x8A6)",
+      "kind": "block-builder"
+    },
+    "0x15da7556d5ed888306839bed06f868aeaedcb0d7": {
+      "entity": "revolut",
+      "label": "Cold Wallet (0x15D)",
+      "kind": "exchange"
+    },
+    "0x841ed663f2636863d40be4ee76243377dff13a34": {
+      "entity": "robinhood",
+      "label": "Hot Wallet (0x841)",
+      "kind": "exchange"
+    },
+    "0x4cb16d4153123a74bc724d161050959754f378d8": {
+      "entity": "sablier",
+      "label": "Sablier V2 Lockup Linear NFT (SAB-V2-LOCKUP-LIN) (0x4CB)",
+      "kind": "vesting"
+    },
+    "0xe261b366f231b12fcb58d6bbd71e57faee82431d": {
+      "entity": "sablier",
+      "label": "SablierLockup (0xe26)",
+      "kind": "vesting"
+    },
+    "0x85c2e985a4fb5c3ff25ee27ee424ab21b2fb28f1": {
+      "entity": "titan-builder",
+      "label": "titanbuilder.eth (0x85C)",
+      "kind": "block-builder"
+    },
+    "0x6cc149b5f9ffcc44c46eb4502989e0b0a1d0f3c2": {
+      "entity": "titan-builder",
+      "label": "titanbuilder.eth (0x6Cc)",
+      "kind": "block-builder"
+    },
+    "0x321b7ff75154472b18edb199033ff4d116f340ff": {
+      "entity": "venice-ai",
+      "label": "Staked Venice Token (SVVV) (0x321)",
+      "kind": "issuer"
+    },
+    "0x2d8cb8dc596dad0e1e34e2042e7ae6df93b11524": {
+      "entity": "venice-ai",
+      "label": "Gnosis Safe Proxy (0x2D8)",
+      "kind": "issuer"
+    },
+    "0x4665883f3adb708f301ba75764d39ad0cd2a4d84": {
+      "entity": "venice-ai",
+      "label": "Gnosis Safe Proxy (0x466)",
+      "kind": "issuer"
+    },
+    "0xb3c89592d84ae6adb6a1aa41515ac14ec822b175": {
+      "entity": "venice-ai",
+      "label": "Gnosis Safe Proxy (0xb3c)",
+      "kind": "issuer"
+    }
+  }
+}

@@ -9,7 +9,9 @@
     "lint": "eslint",
     "prebuild": "node scripts/build-snapshots.mjs",
     "predev": "node scripts/build-snapshots.mjs",
-    "snapshot": "node scripts/snapshot.mjs && node scripts/build-snapshots.mjs"
+    "snapshot": "node scripts/snapshot.mjs && node scripts/build-snapshots.mjs",
+    "flows": "node scripts/flows.mjs && node scripts/build-snapshots.mjs",
+    "custody": "node scripts/custody.mjs && node scripts/build-snapshots.mjs"
   },
   "dependencies": {
     "next": "16.3.4",

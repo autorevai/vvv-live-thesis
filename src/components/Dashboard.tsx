@@ -3,10 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { HistoryPayload } from "@/app/api/history/route";
 import type { DailyDelta } from "@/lib/snapshots";
+import type { FlowWindow } from "@/lib/flows";
+import type { CustodyDay } from "@/lib/custody";
 import type { ThesisModel } from "@/lib/thesis";
 import DailyRecord from "./DailyRecord";
 import DayZeroSnapshot from "./DayZeroSnapshot";
 import FailureConditions from "./FailureConditions";
+import Custody from "./Custody";
 import Hero from "./Hero";
 import Methodology from "./Methodology";
 import Pillars from "./Pillars";
@@ -25,10 +28,14 @@ export default function Dashboard({
   initialLive,
   initialHistory,
   daily,
+  flows,
+  custody,
 }: {
   initialLive: ThesisModel | null;
   initialHistory: HistoryPayload | null;
   daily: DailyDelta[];
+  flows: FlowWindow | null;
+  custody: CustodyDay | null;
 }) {
   const [live, setLive] = useState(initialLive);
   const [history, setHistory] = useState(initialHistory);
@@ -117,6 +124,7 @@ export default function Dashboard({
           <TheThesis m={live} />
           <Pillars m={live} />
           <Scorecard m={live} />
+          <Custody c={custody} w={flows} />
           <DailyRecord rows={daily} />
           <FailureConditions m={live} />
           <Methodology m={live} />

@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 .claude/cache/
 src/data/snapshots.json
+src/data/flows.json
+src/data/custody.json

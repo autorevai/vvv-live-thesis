@@ -7,6 +7,8 @@ import { soft } from "@/lib/sources/fetchers";
 import { buildThesis } from "@/lib/thesis";
 import { DAY_ZERO } from "@/lib/constants";
 import { dailyDeltas } from "@/lib/snapshots";
+import { flowWindow } from "@/lib/flows";
+import { latestCustody } from "@/lib/custody";
 
 export const revalidate = 60;
 
@@ -17,7 +19,15 @@ export default async function Page() {
   const live = quotes && chain && venice ? buildThesis(quotes, chain, venice) : null;
   const history = live ? await soft(buildHistory(live.freeFloat)) : null;
 
-  return <Dashboard initialLive={live} initialHistory={history} daily={dailyDeltas()} />;
+  return (
+    <Dashboard
+      initialLive={live}
+      initialHistory={history}
+      daily={dailyDeltas()}
+      flows={flowWindow(7)}
+      custody={latestCustody()}
+    />
+  );
 }
 
 async function buildHistory(freeFloat: number): Promise<HistoryPayload> {

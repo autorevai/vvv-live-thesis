@@ -2,7 +2,12 @@ import { CONTRACTS } from "@/lib/constants";
 import { cached } from "@/lib/cache";
 import { fetchJson } from "./fetchers";
 
-const RPC = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+/**
+ * publicnode answers current state without a key and without the throttling
+ * that makes mainnet.base.org drop requests under any load. Every call here is
+ * against the latest block, so its refusal to serve archive requests is fine.
+ */
+const RPC = process.env.BASE_RPC_URL || "https://base-rpc.publicnode.com";
 
 const SELECTOR = {
   totalSupply: "0x18160ddd",
