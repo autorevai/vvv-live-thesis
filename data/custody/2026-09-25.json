@@ -1,0 +1,319 @@
+{
+  "date": "2026-09-25",
+  "recorded_at": "2026-09-25T06:06:13.592Z",
+  "vvv_price_usd": 31.301,
+  "label_source": "https://arkm.com/explorer/token/venice-token",
+  "labels_retrieved_at": "2026-09-22T06:44:00.979909Z",
+  "addresses_checked": 36,
+  "addresses_unread": 0,
+  "exchange_vvv": 6802534.334738368,
+  "exchange_usd": 212926127.21164566,
+  "market_maker_vvv": 90473.92998651936,
+  "issuer_vvv": 65969575.94086455,
+  "vesting_vvv": 1931766.7138239234,
+  "pool_vvv": 536399.7791001337,
+  "entities": [
+    {
+      "entity": "venice-ai",
+      "kind": "issuer",
+      "vvv": 65969575.94086455,
+      "addresses": 4
+    },
+    {
+      "entity": "coinbase",
+      "kind": "exchange",
+      "vvv": 3513808.2276619114,
+      "addresses": 5
+    },
+    {
+      "entity": "sablier",
+      "kind": "vesting",
+      "vvv": 1931766.7138239234,
+      "addresses": 2
+    },
+    {
+      "entity": "bybit",
+      "kind": "exchange",
+      "vvv": 1106595.91385343,
+      "addresses": 1
+    },
+    {
+      "entity": "kraken",
+      "kind": "exchange",
+      "vvv": 793846.5604840332,
+      "addresses": 4
+    },
+    {
+      "entity": "aerodrome-finance",
+      "kind": "pool",
+      "vvv": 536399.7791001337,
+      "addresses": 3
+    },
+    {
+      "entity": "okx",
+      "kind": "exchange",
+      "vvv": 484414.087440149,
+      "addresses": 2
+    },
+    {
+      "entity": "gate-io",
+      "kind": "exchange",
+      "vvv": 310094.6831539445,
+      "addresses": 2
+    },
+    {
+      "entity": "robinhood",
+      "kind": "exchange",
+      "vvv": 309784.238590591,
+      "addresses": 1
+    },
+    {
+      "entity": "revolut",
+      "kind": "exchange",
+      "vvv": 160270.68317988302,
+      "addresses": 1
+    },
+    {
+      "entity": "mexc",
+      "kind": "exchange",
+      "vvv": 92386.96443858705,
+      "addresses": 1
+    },
+    {
+      "entity": "b2c2",
+      "kind": "market-maker",
+      "vvv": 90473.92998651936,
+      "addresses": 1
+    },
+    {
+      "entity": "kucoin",
+      "kind": "exchange",
+      "vvv": 31332.9759358388,
+      "addresses": 1
+    },
+    {
+      "entity": "near-intents",
+      "kind": "bridge",
+      "vvv": 24218.083390134623,
+      "addresses": 1
+    },
+    {
+      "entity": "moonwell",
+      "kind": "lending",
+      "vvv": 4233.0343065409015,
+      "addresses": 1
+    }
+  ],
+  "addresses": [
+    {
+      "address": "0x321b7ff75154472b18edb199033ff4d116f340ff",
+      "entity": "venice-ai",
+      "label": "Staked Venice Token (SVVV) (0x321)",
+      "kind": "issuer",
+      "vvv": 35000415.169617705
+    },
+    {
+      "address": "0x2d8cb8dc596dad0e1e34e2042e7ae6df93b11524",
+      "entity": "venice-ai",
+      "label": "Gnosis Safe Proxy (0x2D8)",
+      "kind": "issuer",
+      "vvv": 20767226.899491224
+    },
+    {
+      "address": "0x4665883f3adb708f301ba75764d39ad0cd2a4d84",
+      "entity": "venice-ai",
+      "label": "Gnosis Safe Proxy (0x466)",
+      "kind": "issuer",
+      "vvv": 8629008.286134899
+    },
+    {
+      "address": "0x0810a411a9c4f4c9dd0cb5d95dfb9aa95a02f043",
+      "entity": "coinbase",
+      "label": "0x0810A411a9c4f4c9dd0Cb5d95dFb9Aa95a02f043",
+      "kind": "exchange",
+      "vvv": 1757327.2756177343
+    },
+    {
+      "address": "0x4cb16d4153123a74bc724d161050959754f378d8",
+      "entity": "sablier",
+      "label": "Sablier V2 Lockup Linear NFT (SAB-V2-LOCKUP-LIN) (0x4CB)",
+      "kind": "vesting",
+      "vvv": 1634259.6354056078
+    },
+    {
+      "address": "0xb3c89592d84ae6adb6a1aa41515ac14ec822b175",
+      "entity": "venice-ai",
+      "label": "Gnosis Safe Proxy (0xb3c)",
+      "kind": "issuer",
+      "vvv": 1572925.5856207146
+    },
+    {
+      "address": "0xbaed383ede0e5d9d72430661f3285daa77e9439f",
+      "entity": "bybit",
+      "label": "Hot Wallet (0xBae)",
+      "kind": "exchange",
+      "vvv": 1106595.91385343
+    },
+    {
+      "address": "0x323dd264edd7dcc706a85652a3d15ddaed3ef0e1",
+      "entity": "coinbase",
+      "label": "0x323dD264edd7dCC706A85652A3D15dDAed3eF0E1",
+      "kind": "exchange",
+      "vvv": 843670.3019999999
+    },
+    {
+      "address": "0x419eedf956b684521a463252e9a90ba915615eab",
+      "entity": "coinbase",
+      "label": "0x419Eedf956b684521A463252e9A90Ba915615EaB",
+      "kind": "exchange",
+      "vvv": 699810.4488436001
+    },
+    {
+      "address": "0xc8802feab2fafb48b7d1ade77e197002c210f391",
+      "entity": "okx",
+      "label": "Hot Wallet (0xc88)",
+      "kind": "exchange",
+      "vvv": 376304.9523766966
+    },
+    {
+      "address": "0x44a3e0f35fe1f2fbaa4310873a8a8125babec61b",
+      "entity": "kraken",
+      "label": "Hot Wallet (0x44a)",
+      "kind": "exchange",
+      "vvv": 336248.09864140034
+    },
+    {
+      "address": "0x841ed663f2636863d40be4ee76243377dff13a34",
+      "entity": "robinhood",
+      "label": "Hot Wallet (0x841)",
+      "kind": "exchange",
+      "vvv": 309784.238590591
+    },
+    {
+      "address": "0x01784ef301d79e4b2df3a21ad9a536d4cf09a5ce",
+      "entity": "aerodrome-finance",
+      "label": "Volatile AMM - WETH/VVV (VAMM-WETH/VVV) (0x017)",
+      "kind": "pool",
+      "vvv": 305792.0010333021
+    },
+    {
+      "address": "0xe261b366f231b12fcb58d6bbd71e57faee82431d",
+      "entity": "sablier",
+      "label": "SablierLockup (0xe26)",
+      "kind": "vesting",
+      "vvv": 297507.07841831556
+    },
+    {
+      "address": "0x7dafba1d69f6c01ae7567ffd7b046ca03b706f83",
+      "entity": "kraken",
+      "label": "Cold Wallet (0x7DA)",
+      "kind": "exchange",
+      "vvv": 208676.4550261151
+    },
+    {
+      "address": "0xd2dd7b597fd2435b6db61ddf48544fd931e6869f",
+      "entity": "kraken",
+      "label": "Cold Wallet (0xd2D)",
+      "kind": "exchange",
+      "vvv": 189058.18055195158
+    },
+    {
+      "address": "0xc882b111a75c0c657fc507c04fbfcd2cc984f071",
+      "entity": "gate-io",
+      "label": "Cold Wallet (0xC88)",
+      "kind": "exchange",
+      "vvv": 187830.66027420724
+    },
+    {
+      "address": "0xbb345d35450bf9ee76f3d2ce214e8e7ac5e1071d",
+      "entity": "aerodrome-finance",
+      "label": "Volatile AMM - VVV/DIEM (VAMM-VVV/DIEM) (0xbB3)",
+      "kind": "pool",
+      "vvv": 170772.65788291188
+    },
+    {
+      "address": "0x15da7556d5ed888306839bed06f868aeaedcb0d7",
+      "entity": "revolut",
+      "label": "Cold Wallet (0x15D)",
+      "kind": "exchange",
+      "vvv": 160270.68317988302
+    },
+    {
+      "address": "0x3f9aa1cc4ead6c227062c1c13e6d928d9a1166db",
+      "entity": "coinbase",
+      "label": "Cold Wallet (0x3f9)",
+      "kind": "exchange",
+      "vvv": 126625.93572873183
+    },
+    {
+      "address": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+      "entity": "gate-io",
+      "label": "Hot Wallet (0x0D0)",
+      "kind": "exchange",
+      "vvv": 122264.02287973725
+    },
+    {
+      "address": "0xfd4fa5533e236037088adebb9b1b2ff2672f442e",
+      "entity": "okx",
+      "label": "Hot Wallet (0xFD4)",
+      "kind": "exchange",
+      "vvv": 108109.13506345243
+    },
+    {
+      "address": "0x4e3ae00e8323558fa5cac04b152238924aa31b60",
+      "entity": "mexc",
+      "label": "Hot Wallet (0x4e3)",
+      "kind": "exchange",
+      "vvv": 92386.96443858705
+    },
+    {
+      "address": "0xc333e80ef2dec2805f239e3f1e810612d294f771",
+      "entity": "b2c2",
+      "label": "(0xC33)",
+      "kind": "market-maker",
+      "vvv": 90473.92998651936
+    },
+    {
+      "address": "0xe3343cb3113cef59ec25ff3f333c521dfa326917",
+      "entity": "coinbase",
+      "label": "(0xE33)",
+      "kind": "exchange",
+      "vvv": 86374.26547184496
+    },
+    {
+      "address": "0xcc282e2004428939ee5149a9e7872f0b4d5d5ec7",
+      "entity": "kraken",
+      "label": "Hot Wallet (0xcC2)",
+      "kind": "exchange",
+      "vvv": 59863.826264566174
+    },
+    {
+      "address": "0x01271a205e3f37cbfc9b353170d726060e193c0d",
+      "entity": "aerodrome-finance",
+      "label": "CLPool (0x012)",
+      "kind": "pool",
+      "vvv": 59835.120183919644
+    },
+    {
+      "address": "0x18b0f4547a89fe4c5fe84f258bea3601fa281e9f",
+      "entity": "kucoin",
+      "label": "Hot Wallet (0x18b)",
+      "kind": "exchange",
+      "vvv": 31332.9759358388
+    },
+    {
+      "address": "0x2cff890f0378a11913b6129b2e97417a2c302680",
+      "entity": "near-intents",
+      "label": "Bridge Hot Wallet (0x2Cf)",
+      "kind": "bridge",
+      "vvv": 24218.083390134623
+    },
+    {
+      "address": "0xd64bcb70c613a6d1f4d7d57ba64bb4a0767a9682",
+      "entity": "moonwell",
+      "label": "Moonwell VVV (MVVV) (0xD64)",
+      "kind": "lending",
+      "vvv": 4233.0343065409015
+    }
+  ]
+}
