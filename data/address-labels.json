@@ -2645,5 +2645,185 @@
   },
   "0xf5d547595a66f97bfb5e03e47d112f7fa8eb37c6": {
     "kind": "contract"
+  },
+  "0xdabae28e29358f626891426f17b00c5630a34c17": {
+    "kind": "wallet"
+  },
+  "0x1d04067e4d115ae7a7f31897c3d203b3e43dd6bc": {
+    "kind": "wallet"
+  },
+  "0xfa04579f682d8a80fd04d7c6567bad6716bc8f12": {
+    "kind": "wallet"
+  },
+  "0x976644c7ed9784e5758bb6584dbe3b91420e3463": {
+    "kind": "wallet"
+  },
+  "0x7014411861ac2a58682bb8ea2ce2f49f1c533953": {
+    "kind": "wallet"
+  },
+  "0xb98f10e2b89a93e9231be33e16487867afcb45d0": {
+    "kind": "wallet"
+  },
+  "0xeb018acfa1a146a1f20c3ba2158c6fe705cf034e": {
+    "kind": "wallet"
+  },
+  "0x52c5233d3d12e9d5522759ace8b551d926b797d1": {
+    "kind": "wallet"
+  },
+  "0x12db30d52c4d30f425c186dac8ce5a28888229cb": {
+    "kind": "wallet"
+  },
+  "0xffacde5d6b6bea7cddd8534632ff6f70b6624abe": {
+    "kind": "wallet"
+  },
+  "0x403e2365e5b2ac777cb857fe655f5f6a5dc4f212": {
+    "kind": "wallet"
+  },
+  "0x3e7838750a60d8484b633fc253752314b082e22f": {
+    "kind": "wallet"
+  },
+  "0x14e43c3c20cb168a11440665801306419fc24d81": {
+    "kind": "wallet"
+  },
+  "0x9f9adfdc1ca037f40d5c5cba0950ed60d2bfef90": {
+    "kind": "wallet"
+  },
+  "0xed6b4f93a357b210d31e0046c1c0d6b453ef9197": {
+    "kind": "wallet"
+  },
+  "0x8c252f216294a489821ee76edda9dbb16085798a": {
+    "kind": "wallet"
+  },
+  "0x6d7a48dd19d85a3075068c2f57602d28d0a610b9": {
+    "kind": "wallet"
+  },
+  "0xc13b9193230a07d85d56e0fd68e8f373ed1f52aa": {
+    "kind": "wallet"
+  },
+  "0x1ff51ea76428f2bbf548f30967149b32853f053c": {
+    "kind": "wallet"
+  },
+  "0x5b9cbe2ce6f111b22e631313b5ed2f019ad9562c": {
+    "kind": "wallet"
+  },
+  "0xb2126d5235436d8133b528258f1d7d737baf6058": {
+    "kind": "wallet"
+  },
+  "0xb2e6cf3e1ff4ce3f4ecb0baebbc06e3f351f027e": {
+    "kind": "wallet"
+  },
+  "0x2bcc04b1a06398c7929bf808ae9964705073b265": {
+    "kind": "wallet"
+  },
+  "0xa19a3a84a88f840c327c1f6dd61a389008f03a6f": {
+    "kind": "wallet"
+  },
+  "0xdf1e6ff552d71ee8d203cac6663f172109922eb4": {
+    "kind": "wallet"
+  },
+  "0x5a4c9b18f388abfc6e1ef775931626a95e8bc7cd": {
+    "kind": "wallet"
+  },
+  "0xb1e05e32c051e5d88ac20d667d36f3f963f69e97": {
+    "kind": "wallet"
+  },
+  "0x8f207225d877043b07c2c59b819ec08993c71964": {
+    "kind": "wallet"
+  },
+  "0xd9a5a53494a77eb97dc297a429f7631968f2033c": {
+    "kind": "wallet"
+  },
+  "0xe86d78381c4cd7b4a67278e1194ca7babc363af9": {
+    "kind": "wallet"
+  },
+  "0x6bc1ef57d905bae7d59c70e965a33df8f936d9aa": {
+    "kind": "wallet"
+  },
+  "0x795b3e58a44d61128f48119ab583a09551a8b64a": {
+    "kind": "wallet"
+  },
+  "0xcdf917bcf3c89615d5b0b69ec8ff7ae8ad8410e3": {
+    "kind": "wallet"
+  },
+  "0xe4ddcc905b9229d69f54b3371722cb6ef5f5ffb9": {
+    "kind": "wallet"
+  },
+  "0xd8fbf265269dd7b4d6ed27866caf0f0568900811": {
+    "kind": "wallet"
+  },
+  "0xd4aedad98d9944c96849dd22c4dbbee25bb9eeb2": {
+    "kind": "wallet"
+  },
+  "0x772cc7ffaaf8f5ad6d22204448868f0c35c57831": {
+    "kind": "wallet"
+  },
+  "0xf466dd826813be37afaf6780a9b48719cc13efbc": {
+    "kind": "wallet"
+  },
+  "0xc2d29bfd23fcd41aaf34c9d4a6386eb824147b7e": {
+    "kind": "wallet"
+  },
+  "0x292cf34ef264384ef5dc03b2b0792b853a2df7f7": {
+    "kind": "wallet"
+  },
+  "0x11f38d70926f6d3dd05f67390e2d8954c5ba8d91": {
+    "kind": "wallet"
+  },
+  "0x9d7724279823c431c4df59cfdfe3803b8b67cd1f": {
+    "kind": "wallet"
+  },
+  "0x66f68b236f13f3c9b214df0fa6847d16f25c62e0": {
+    "kind": "wallet"
+  },
+  "0xfe263102682933297cb65dc813e5193249769251": {
+    "kind": "wallet"
+  },
+  "0xc237641342d8d49eb50bbda069c0ab75b4d04194": {
+    "kind": "contract"
+  },
+  "0xf855aa266f7106a1765c1349c434fbca2fb71af3": {
+    "kind": "contract"
+  },
+  "0xf01fbca54429f1ba9824e6327cb991d98eab433b": {
+    "kind": "contract"
+  },
+  "0xce1453c9808b4779a2c01266e96c0a30d5d81891": {
+    "kind": "contract"
+  },
+  "0x93eac9841c1a4cb8f116acf358ff9cb539f685ee": {
+    "kind": "contract"
+  },
+  "0x535d374c13e88ec37ed62f949adf423e2cfaa823": {
+    "kind": "contract"
+  },
+  "0xbcffa8778b004ca446a9f964d6b039115c36195e": {
+    "kind": "contract"
+  },
+  "0x5625f3daacf5ce2b89aa75c380d2b730102646c3": {
+    "kind": "contract"
+  },
+  "0x9177309cf7b963378943c680f4557b520683653b": {
+    "kind": "contract"
+  },
+  "0x58aff6ab6b9f13cdd10f980927c6fb7b8423f076": {
+    "kind": "contract"
+  },
+  "0xdeac500de46ca3239341618467bd94666580f543": {
+    "kind": "contract"
+  },
+  "0xd0ea73a3b2fff447758adc45bd3e1728b556a69c": {
+    "kind": "contract"
+  },
+  "0x9430c0fad5ee15dc1b59b976fdee1fb5f888de0e": {
+    "kind": "contract"
+  },
+  "0x6598c42d7291167f3a36796b166078422ff301f7": {
+    "kind": "contract"
+  },
+  "0x10ad3193762c146a283623342b8da39ede5015a0": {
+    "kind": "contract"
+  },
+  "0x836b336fca26913176efc45a5a6e5e72cd7bd13b": {
+    "kind": "contract"
   }
 }
