@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-30",
+  "recorded_at": "2026-09-30T05:34:01.848Z",
+  "vvv_price": 26.73,
+  "vvv_circulating": 48564386.02951967,
+  "vvv_total_supply": 81074641.11383045,
+  "vvv_free_float": 15342311.614509866,
+  "vvv_free_float_cap": 410099989.4558487,
+  "vvv_staked_plus_locked": 33222074.415009804,
+  "vvv_burned": 33883029.75533182,
+  "vvv_total_supply_onchain": 114957670.86916228,
+  "diem_supply": 36540.219105448436,
+  "vvv_market_cap": 1288905437.4253316,
+  "tao_market_cap": 3463468998.1238275,
+  "near_market_cap": 6512342527.210296,
+  "zec_market_cap": 23932410238.94544,
+  "venice_arr": null,
+  "venice_users": null,
+  "api_calls_day": null,
+  "tokens_processed_month": null
+}
