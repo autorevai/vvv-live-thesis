@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-30",
+  "recorded_at": "2026-10-01T07:11:28.726Z",
+  "first_block": 51968527,
+  "last_block": 52011726,
+  "vvv_price_usd": 27.003891007172957,
+  "transfer_count": 105446,
+  "addresses_touched": 3208,
+  "addresses_labelled": 460,
+  "addresses_unresolved": 0,
+  "unresolved_vvv": 0,
+  "pool_absorption_vvv": 51049.35339225829,
+  "pool_absorption_usd": 1378531.174991198,
+  "pool_volume_vvv": 54366521.49717015,
+  "staking_in_vvv": 46744.0604466867,
+  "staking_out_vvv": 193144.33687402384,
+  "staking_net_vvv": -146400.27642733714,
+  "staking_net_usd": -3953377.1080638045,
+  "burned_vvv": 693.2146069499224,
+  "burned_usd": 18719.491690655945,
+  "pools": [
+    {
+      "address": "0x46d398a5b33709877f50c8918a7ee96f1be1d7dd",
+      "pair": "VVV/WETH",
+      "net": -239.11271288990974,
+      "volume": 31456514.615054473
+    },
+    {
+      "address": "0xa135b59fe221c0c8d441294f97f96fbc37bc9fbe",
+      "pair": "VVV/WETH",
+      "net": -40319.239417318255,
+      "volume": 22363127.136502296
+    },
+    {
+      "address": "0x01271a205e3f37cbfc9b353170d726060e193c0d",
+      "pair": "CLPool (0x012)",
+      "net": -685.0554064682801,
+      "volume": 383161.89833694836
+    },
+    {
+      "address": "0x01784ef301d79e4b2df3a21ad9a536d4cf09a5ce",
+      "pair": "Volatile AMM - WETH/VVV (VAMM-WETH/VVV) (0x017)",
+      "net": -4220.006728929249,
+      "volume": 83596.3489608189
+    },
+    {
+      "address": "0x7ec6c9d993d9832aa654593f2dbc21303650bc6c",
+      "pair": "VVV/WETH",
+      "net": -3902.611048354527,
+      "volume": 40835.64476074431
+    },
+    {
+      "address": "0x79314ccc98cbc74826df59c336ba8ad01f301d2d",
+      "pair": "VVV/USDC",
+      "net": 0,
+      "volume": 17362.84011536595
+    },
+    {
+      "address": "0x67a11022b7b6ed66f81233f6c8ed6e48f7826530",
+      "pair": "VVV/USDC",
+      "net": -1126.3986164682374,
+      "volume": 15531.814890355072
+    },
+    {
+      "address": "0x1d2bdb7117a5a7d7fe4c1d95681a92e4df13bb69",
+      "pair": "VVV/WETH",
+      "net": -706.268302196497,
+      "volume": 2139.0412494237517
+    }
+  ],
+  "rpc_calls": 124
+}
