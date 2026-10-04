@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-03",
+  "recorded_at": "2026-10-04T06:50:37.644Z",
+  "first_block": 52098127,
+  "last_block": 52141326,
+  "vvv_price_usd": 27.816874673472427,
+  "transfer_count": 87025,
+  "addresses_touched": 2613,
+  "addresses_labelled": 431,
+  "addresses_unresolved": 0,
+  "unresolved_vvv": 0,
+  "pool_absorption_vvv": 26905.50395911187,
+  "pool_absorption_usd": 748427.031657231,
+  "pool_volume_vvv": 49019452.161058895,
+  "staking_in_vvv": 9329.17984154006,
+  "staking_out_vvv": 23115.634313308306,
+  "staking_net_vvv": -13786.454471768246,
+  "staking_net_usd": -383496.0762327108,
+  "burned_vvv": 653.734194616078,
+  "burned_usd": 18184.842161398872,
+  "pools": [
+    {
+      "address": "0xa135b59fe221c0c8d441294f97f96fbc37bc9fbe",
+      "pair": "VVV/WETH",
+      "net": -10230.088371030986,
+      "volume": 26832576.775433823
+    },
+    {
+      "address": "0x46d398a5b33709877f50c8918a7ee96f1be1d7dd",
+      "pair": "VVV/WETH",
+      "net": 4675.399411480874,
+      "volume": 20614276.20806773
+    },
+    {
+      "address": "0x01271a205e3f37cbfc9b353170d726060e193c0d",
+      "pair": "CLPool (0x012)",
+      "net": -17055.13068543095,
+      "volume": 997057.5735122322
+    },
+    {
+      "address": "0x30303e306aea9589fbdbf38e525091a0b3bedf55",
+      "pair": "VVV/WETH",
+      "net": 817.5418479798245,
+      "volume": 339896.4733596408
+    },
+    {
+      "address": "0x7ec6c9d993d9832aa654593f2dbc21303650bc6c",
+      "pair": "VVV/WETH",
+      "net": -1586.6951975610573,
+      "volume": 109218.91101156724
+    },
+    {
+      "address": "0x88b29e16cb257af4216f7ac04ffb6e786aef1ded",
+      "pair": "VVV/WETH",
+      "net": 1157.2063692172815,
+      "volume": 84107.80077695298
+    },
+    {
+      "address": "0x01784ef301d79e4b2df3a21ad9a536d4cf09a5ce",
+      "pair": "Volatile AMM - WETH/VVV (VAMM-WETH/VVV) (0x017)",
+      "net": -521.2799923864131,
+      "volume": 16206.935932153367
+    },
+    {
+      "address": "0x79314ccc98cbc74826df59c336ba8ad01f301d2d",
+      "pair": "VVV/USDC",
+      "net": 0,
+      "volume": 9026.686531525746
+    }
+  ],
+  "rpc_calls": 139
+}
